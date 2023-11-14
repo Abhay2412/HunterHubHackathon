@@ -13,22 +13,22 @@ CORS(app)
 # Hit ChatGPT endpoint with query prompt and files saved locally
 @app.route('/api/GPTprompt', methods=['GET'])
 def prompt():
-    return '<h1>Hello, GPT Prompt!</h1>'
+    return {'data': 'GPTprompt'}
 
 # Recommend scholarships based on user profile and files saved locally
 @app.route('/api/recommend', methods=['GET'])
 def recommend():
-    return '<h1>Hello, Recommend!</h1>'
+    return {'data': 'recommend'}
 
 # Parse resume file
 @app.route('/api/parse', methods=['GET'])
 def parse():
-    return '<h1>Hello, Parse!</h1>'
+    return {'data': 'parse'}
 
 # Summarize PDF documents
 @app.route('/api/summarize', methods=['GET'])
 def summarize():
-    return '<h1>Hello, Summarize!</h1>'
+    return {'data': 'summarize'}
 
 @app.route('/api/time')
 def get_current_time():
