@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import csv
 
 def fetch_scholarship_links(list_page_url):
     response = requests.get(list_page_url)
@@ -73,8 +74,23 @@ def scrape_scholarship(url):
 
     return scholarship
 
-list_page_url = "https://ucalgary.ca/registrar/finances/awards-scholarships-and-bursaries/search-awards"
-scholarship_links = fetch_scholarship_links(list_page_url)
+def convert_to_csv(all_scholarships):
+    csv_columns = ["title", "award_value", "number_of_awards", "competition_to_apply", "donor", "award_description", "required_criteria", "year_entering", "award_information"]
+    
+    with open('scholarships_data.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+        writer.writeheader()
+        for scholarship in all_scholarships:
+            # Convert lists and dicts to strings for CSV
+            scholarship['award_description'] = '; '.join(scholarship['award_description'])
+            scholarship['required_criteria'] = json.dumps(scholarship['required_criteria'])
+            scholarship['year_entering'] = ', '.join(map(str, scholarship['year_entering']))
+            scholarship['award_information'] = json.dumps(scholarship['award_information'])
+            writer.writerow(scholarship)
+
+# Base URL of the website where scholarships are listed
+base_url = "https://ucalgary.ca/registrar/finances/awards-scholarships-and-bursaries/search-awards"
+scholarship_links = fetch_scholarship_links(base_url)
 all_scholarships = [scrape_scholarship(url) for url in scholarship_links]
 
 # Sort the scholarships alphabetically by title
@@ -82,3 +98,6 @@ all_scholarships_sorted = sorted(all_scholarships, key=lambda x: x['title'])
 
 with open('scholarships_data_sorted.json', 'w', encoding='utf-8') as f:
     json.dump(all_scholarships_sorted, f, ensure_ascii=False, indent=4)
+
+# Write data to CSV file
+convert_to_csv(all_scholarships)
