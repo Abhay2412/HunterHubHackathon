@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 
 
 
-const SummarizePage = () => {
+const JobsPage = () => {
     const [state, setState] = useState(0);
   
     useEffect(() => {
-      fetch('http://localhost:8000/api/summarize').then(res => res.json()).then(data => {
+      fetch('http://localhost:8000/api/jobs').then(res => res.json()).then(data => {
         setState(data.data);
       });
     }, []);
@@ -20,4 +20,4 @@ const SummarizePage = () => {
     );
 }
 
-export default SummarizePage
+export default JobsPage

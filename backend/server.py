@@ -25,10 +25,10 @@ def recommend():
 def parse():
     return {'data': 'parse'}
 
-# Summarize PDF documents
-@app.route('/api/summarize', methods=['GET'])
-def summarize():
-    return {'data': 'summarize'}
+# Jobs PDF documents
+@app.route('/api/jobs', methods=['GET'])
+def jobs():
+    return {'data': 'jobs'}
 
 @app.route('/api/time')
 def get_current_time():
