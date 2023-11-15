@@ -8,7 +8,7 @@
 5. `pip install flask_cors`
 6. Run application: `flask run`
 
-Note: For Mac for steps 2-3 use [this](https://realpython.com/python-virtual-environments-a-primer/).
+Note: For Mac for steps 2-3 use [this](https://realpython.com/python-virtual-environments-a-primer/). Also steps 2-3 are optional.
 
 ### Run Frontend
 1. Go into frontend folder (in new terminal): `cd frontend`
