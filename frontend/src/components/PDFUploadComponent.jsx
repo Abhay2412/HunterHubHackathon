@@ -8,7 +8,7 @@ const PDFUploadComponent = ({ onPDFUpload }) => {
     if (file) {
       onPDFUpload(file);
     }
-  };
+};
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
