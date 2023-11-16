@@ -2,12 +2,12 @@
 import { useNavigate } from 'react-router-dom';
 import PDFUploadPage from '../pages/NotesPDFUploadPage';
 
-const NotesFileUploadHandler = ({ onFileSelect }) => {
+const NotesFileUploadHandler = ({ onFileSelect, url }) => {
     const navigate = useNavigate();
 
     const handleFileSelect = (selectedFile) => {
         onFileSelect(selectedFile);
-        navigate('/summarizer');
+        navigate(url);
     };
 
     return (

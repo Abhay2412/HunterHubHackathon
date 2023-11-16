@@ -13,6 +13,7 @@ import './App.css';
 
 function App() {
     const [file, setNoteSummarizerFile] = useState(null);
+    const [resumeFile, setResumeFile] = useState(null);
 
     return (
         <div className='App'>
@@ -20,11 +21,12 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/prompt" element={<GPTPromptPage />} />
-                    <Route path="/scholarship-help" element={<ScholarshipHelpPage />} />
+                    <Route path="/scholarship-help" element={<ScholarshipHelpPage file={resumeFile}/>} />
                     <Route path="/recommended-scholarships" element={<RecommendedPage />} />
                     <Route path="/parse" element={<ParsePage />} />
                     <Route path="/summarizer" element={<SummarizerPage file={file} />} />
-                    <Route path="/upload-notes" element={<FileUploadHandler onFileSelect={setNoteSummarizerFile} />} />
+                    <Route path="/upload-notes" element={<FileUploadHandler onFileSelect={setNoteSummarizerFile} url='/summarizer' />} />
+                    <Route path="/upload-resume" element={<FileUploadHandler onFileSelect={setResumeFile} url='/scholarship-help' />} />
                 </Routes>
             </Router>
         </div>
