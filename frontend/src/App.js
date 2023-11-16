@@ -19,7 +19,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/prompt" element={<GPTPromptPage />} />
-                    <Route path="/scholarships" element={<RecommendedPage />} />
+                    <Route path="/recommended-scholarships" element={<RecommendedPage />} />
                     <Route path="/parse" element={<ParsePage />} />
                     <Route path="/summarizer" element={<SummarizerPage file={file} />} />
                     <Route path="/upload-notes" element={<FileUploadHandler onFileSelect={setNoteSummarizerFile} />} />
