@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from 'styled-components';
 import ChatBot from "react-simple-chatbot";
+import FlashCard from "../components/FlashCard";
+import MobileStepper from '@mui/material/MobileStepper';
+import Button from '@mui/material/Button';
+import { Typography } from "@mui/material";
+
+const dummyFlashCards = [
+    { questionContent: "What is an ecosystem?", answerContent: "A community of living organisms and their environment." },
+    { questionContent: "How do ecosystems maintain balance?", answerContent: "Through interactions among plants, animals, and their surroundings." },
+    { questionContent: "Define biodiversity in an ecosystem.", answerContent: "The variety of plant and animal life in a habitat." },
+    { questionContent: "What role do decomposers play?", answerContent: "Breaking down organic matter and recycling nutrients." }
+  ];
 
 const SummarizerPage = ({ file: uploadedFile }) => {
     const [fileUrl, setFileUrl] = useState(null);
@@ -30,21 +41,47 @@ const SummarizerPage = ({ file: uploadedFile }) => {
       };
 
     const theme = {
-        background: "#fff",
+        background: "#ede8e4",
         fontFamily: "Arial, Helvetica, sans-serif",
-        headerBgColor: "#B8E4BC",
+        headerBgColor: "#3EB489",
         headerFontColor: "#fff",
         headerFontSize: "15px",
-        botBubbleColor: "#B8E4BC",
+        botBubbleColor: "#3EB489",
         botFontColor: "#fff",
         userBubbleColor: "#315234",
         userFontColor: "#4A4A4A",
     };
 
+    const [activeStep, setActiveStep] = useState(0);
+
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+    
+
     return (
-        <div className="App" style={{ display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white" }}>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div style={{ overflowY: "scroll", height: "50vh", width: "90%" }}>
+        <div className="App" style={{ display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white", padding: '20px'}}>
+            <div
+                className="background-image"
+                style={{
+                    backgroundImage: "url('https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", // Add the URL of your background image
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    opacity: 0.8,
+                }}
+            />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", zIndex: 1}}>
+                <Typography variant="h4" style={{ marginBottom: '12px', marginRight: 'auto', maxWidth: 'fit-content', fontFamily: "cursive", color: "white", fontWeight: "bolder", boxShadow: '0 0 20px 0 rgba(0, 0, 0, 1)', borderRadius: '12px', backgroundColor: "#3EB489", lineHeight: 1.4, letterSpacing: 2}}>Scholarly - Learning!</Typography>
+                <div style={{ overflowY: "scroll", height: "80vh", width: "90%" }}>
                     {fileUrl && (
                         <iframe 
                             src={fileUrl} 
@@ -53,8 +90,28 @@ const SummarizerPage = ({ file: uploadedFile }) => {
                         ></iframe>
                     )}
                 </div>
-                <div style={{ height: "50vh", width: "90%", marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <p style={{ color: "#B8E4BC" }}>Flashcard UI Placeholder</p>
+                <div style={{ height: "20vh", width: "100%", marginTop: "20px", alignItems: "center", justifyContent: "center" }}>
+                    <FlashCard
+                        questionContent={dummyFlashCards[activeStep].questionContent}
+                        answerContent={dummyFlashCards[activeStep].answerContent}
+                    />
+                    <MobileStepper
+                        variant="progress"
+                        steps={dummyFlashCards.length}
+                        position="static"
+                        activeStep={activeStep}
+                        sx={{ width: '100%', backgroundColor: 'transparent', marginTop: '10px' }}
+                        nextButton={
+                        <Button style={{fontWeight: 'bolder'}} size="large" onClick={handleNext} disabled={activeStep === dummyFlashCards.length - 1}>
+                            Next
+                        </Button>
+                        }
+                        backButton={
+                        <Button style={{fontWeight: 'bolder'}} size="large" onClick={handleBack} disabled={activeStep === 0}>
+                            Back
+                        </Button>
+                        }
+                    />
                 </div>
             </div>
             <div style={{ flex: 1, padding: "10px", height: "100vh"}}>
