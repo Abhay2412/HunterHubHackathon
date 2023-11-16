@@ -1,0 +1,101 @@
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "communication"}, {"LOWER": "skills"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "verbal"}, {"LOWER": "communication"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "written"}, {"LOWER": "communication"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "interpersonal"}, {"LOWER": "skills"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "teamwork"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "collaboration"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "problem-solving"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "critical"}, {"LOWER": "thinking"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "creativity"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "leadership"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "time"}, {"LOWER": "management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "organization"}, {"LOWER": "skills"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "emotional"}, {"LOWER": "intelligence"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "negotiation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "flexibility"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "conflict"}, {"LOWER": "resolution"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "empathy"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "stress"}, {"LOWER": "management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "customer"}, {"LOWER": "service"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "decision-making"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "self-motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confident"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "positive"}, {"LOWER": "attitude"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "proactive"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confident"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "communication"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "listening"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "presentation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "verbal"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "written"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "interpersonal"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "relationship-building"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "teamwork"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "collaboration"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "flexibility"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "problem-solving"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "critical-thinking"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "creativity"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "leadership"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "time-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "organization"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "emotional-intelligence"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "negotiation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "conflict-resolution"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "empathy"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "stress-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "customer-service"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "decision-making"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "self-motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confidence"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "positive-attitude"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "proactivity"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "emotional-awareness"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "patience"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "assertiveness"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "time-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confident"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "work-ethic"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "analytical-thinking"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "attention-to-detail"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "resilience"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "problem-solving"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "humor"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "collaborative"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "initiative"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "creativity"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "flexibility"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "leadership"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "time-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "organization"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "emotional-intelligence"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "negotiation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "conflict-resolution"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "empathy"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "stress-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "customer-service"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "decision-making"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "self-motivation"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confidence"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "positive-attitude"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "proactivity"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "emotional-awareness"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "patience"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "assertiveness"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "time-management"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "adaptability"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "confident"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "work-ethic"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "analytical-thinking"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "attention-to-detail"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "resilience"}]}
+{"label": "SOFT_SKILL", "pattern": [{"LOWER": "problem-solving"}]}
