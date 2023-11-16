@@ -17,10 +17,8 @@ function HomePage() {
           <Button component={Link} to="/#" variant="contained" color="info">Sign Up!</Button> */}
           {/* <Button component={Link} to="/login" variant="contained" color="success" sx={{ mr: 1 }}>Log In!</Button>
           <Button component={Link} to="/signup" variant="contained" color="info">Sign Up!</Button> */}
-          <Button component={Link} to="/prompt" variant="contained" color="warning" sx={{ fontStyle: "oblique", mr: 1 }}>Answer Scholarship Questions</Button>
-          <Button component={Link} to="/parse" variant="contained" color="success" sx={{ mr: 1 }}>Parse Resume/Documents</Button>
-          <Button component={Link} to="/scholarships" variant="contained" color="info">Scholarships Dashboard</Button>
-          <Button component={Link} to="/summarizer" variant="contained" color="info">Summarizer</Button>
+          <Button component={Link} to="/scholarships" variant="contained" color="info" sx={{ mr: 1 }}>Apply for Scholarships</Button>
+          <Button component={Link} to="/summarizer" variant="contained" color="info" sx={{ mr: 1 }}>Summarize Notes</Button>
         </div>
       </div>
     </>
