@@ -6,7 +6,8 @@ import GPTPromptPage from './pages/GPTPromptPage';
 import RecommendedPage from './pages/RecommendedPage';
 import ParsePage from './pages/ParsePage';
 import SummarizerPage from './pages/SummarizerPage';
-import FileUploadHandler from './components/NotesFileUploadHandler'; // Import the new handler
+import FileUploadHandler from './components/NotesFileUploadHandler'; 
+import ScholarshipHelpPage from './pages/ScholarshipHelpPage';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/prompt" element={<GPTPromptPage />} />
+                    <Route path="/scholarship-help" element={<ScholarshipHelpPage />} />
                     <Route path="/recommended-scholarships" element={<RecommendedPage />} />
                     <Route path="/parse" element={<ParsePage />} />
                     <Route path="/summarizer" element={<SummarizerPage file={file} />} />
