@@ -26,9 +26,9 @@ def parse():
     return {'data': 'parse'}
 
 # Jobs PDF documents
-@app.route('/api/jobs', methods=['GET'])
+@app.route('/api/summarizer', methods=['GET'])
 def jobs():
-    return {'data': 'jobs'}
+    return {'data': 'summarizer'}
 
 @app.route('/api/time')
 def get_current_time():

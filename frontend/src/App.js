@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import GPTPromptPage from './pages/GPTPromptPage';
 import RecommendedPage from './pages/RecommendedPage';
 import ParsePage from './pages/ParsePage';
-import JobsPage from './pages/JobsPage';
+import SummarizerPage from './pages/SummarizerPage';
 
 
 import './App.css';
@@ -19,7 +19,7 @@ function App() {
           <Route path="/prompt" element={<GPTPromptPage />} />
           <Route path="/scholarships" element={<RecommendedPage />} />
           <Route path="/parse" element={<ParsePage />} />
-          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/summarizer" element={<SummarizerPage />} />
         </Routes>
       </Router>
     </div>

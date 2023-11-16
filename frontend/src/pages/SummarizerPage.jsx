@@ -6,7 +6,7 @@ const JobsPage = () => {
     const [state, setState] = useState(0);
   
     useEffect(() => {
-      fetch('http://localhost:8000/api/jobs').then(res => res.json()).then(data => {
+      fetch('http://localhost:8000/api/summarizer').then(res => res.json()).then(data => {
         setState(data.data);
       });
     }, []);
