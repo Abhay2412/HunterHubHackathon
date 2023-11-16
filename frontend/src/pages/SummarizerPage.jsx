@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from 'styled-components';
 import ChatBot from "react-simple-chatbot";
 
-const SummarizerPage = () => {
-    const [file, setFile] = useState(null);
+const SummarizerPage = ({ file: uploadedFile }) => {
+    const [fileUrl, setFileUrl] = useState(null);
 
-    function onFileChange(event) {
-        const file = event.target.files[0];
-        if (file) {
-            setFile(URL.createObjectURL(file));
+    useEffect(() => {
+        if (uploadedFile) {
+            const newFileUrl = URL.createObjectURL(uploadedFile);
+            setFileUrl(newFileUrl);
         }
-    }
+    }, [uploadedFile]);
 
     const steps = [
         {
@@ -45,10 +45,9 @@ const SummarizerPage = () => {
         <div className="App" style={{ display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white" }}>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <div style={{ overflowY: "scroll", height: "50vh", width: "90%" }}>
-                    <input type="file" onChange={onFileChange} accept="application/pdf" />
-                    {file && (
+                    {fileUrl && (
                         <iframe 
-                            src={file} 
+                            src={fileUrl} 
                             style={{ width: "100%", height: "100%" }}
                             title="PDF Viewer"
                         ></iframe>
