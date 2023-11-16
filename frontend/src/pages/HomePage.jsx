@@ -1,27 +1,57 @@
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from "react-router-dom";
-import videoSrc from "../media/production_ID_4253147.mp4";
-import "./HomePage.css";
+import { motion } from 'framer-motion'
+import CustomTypeAnimation from '../components/typingAnimation';
 
 function HomePage() {
+  
+  const backgroundStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: -1,
+    opacity: 0.6, // Set the opacity to 80%
+  };
+
   return (
-    <>
-      <video src={videoSrc} autoPlay loop muted/>
-      <div className='info'>
-        <Typography variant="h1">On The House</Typography>
-        <Typography variant="h4" sx={{fontStyle: "italic", fontFamily: "Georgia"}}>Find Your Next Meal Today.</Typography>
-        <div>
-          {/* <Button component={Link} to="/dashboard" variant="contained" color="warning" sx={{ fontStyle: "oblique", mr: 1 }}>View Recipes</Button> */}
-          {/* <Button component={Link} to="/#" variant="contained" color="success" sx={{ mr: 1 }}>Log In!</Button>
-          <Button component={Link} to="/#" variant="contained" color="info">Sign Up!</Button> */}
-          {/* <Button component={Link} to="/login" variant="contained" color="success" sx={{ mr: 1 }}>Log In!</Button>
-          <Button component={Link} to="/signup" variant="contained" color="info">Sign Up!</Button> */}
-          <Button component={Link} to="/scholarships" variant="contained" color="info" sx={{ mr: 1 }}>Apply for Scholarships</Button>
-          <Button component={Link} to="/summarizer" variant="contained" color="info" sx={{ mr: 1 }}>Summarize Notes</Button>
-        </div>
-      </div>
-    </>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
+    >
+
+      <img
+        src="https://assets-global.website-files.com/60abcbf13c9af64a88390582/6230f5f37b84136a6985b3df_899889.jpg"
+        alt="Background"
+        style={backgroundStyle}
+      />
+
+      {/* Main title */}
+      <CustomTypeAnimation/>
+
+      <Typography variant="h2" align="center" sx={{fontFamily: "inherit", fontStyle: "italic", fontWeight: "lighter"}} gutterBottom>
+        With {" "} <span style={{fontFamily: "cursive", color: "#3EB489", fontWeight: "bold"}}>Scholarly</span>
+      </Typography>
+
+      {/* Buttons stacked on top of each other */}
+      <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
+        <motion.div whileHover={{ scale: 1.1 }}>
+        <Button variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
+          Upload & Start Learning! <span>&#x2192;</span>
+        </Button>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }}>
+        <Button variant="outlined" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
+          Write Scholarship Applications <span>&#x2192;</span>
+        </Button>
+        </motion.div>
+      </Box>
+    </Box>
   );
 };
 
