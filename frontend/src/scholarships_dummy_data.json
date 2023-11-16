@@ -1,0 +1,135 @@
+[
+    {
+        "title": "14 Women's Memorial Award",
+        "award_value": 5500,
+        "number_of_awards": 1,
+        "competition_to_apply": "Continuing Undergraduate Awards Competition",
+        "donor": "President's Advisory Committee to Status of Women & University Women's Network",
+        "award_description": [
+            "Offered annually to a continuing undergraduate student in any faculty. Registered full-time but need not be carrying a full course load",
+            "Academic merit",
+            "Financial need",
+            "Demonstrated commitment to women's issues through activities on behalf of and for the advancement of women's equality."
+        ],
+        "required_criteria": {
+            "Student type": "Undergraduate",
+            "Citizenship/residency": "Any",
+            "Faculty": "Any"
+        },
+        "year_entering": [
+            2,
+            3,
+            4
+        ],
+        "award_information": {
+            "Type of award": "Bursary",
+            "Internal/external/government": "Internal"
+        }
+    },
+    {
+        "title": "25th Anniversary Scholarship in Mathematics and Statistics",
+        "award_value": 1300,
+        "number_of_awards": 3,
+        "competition_to_apply": "Continuing Undergraduate Awards Competition",
+        "donor": "Department of Mathematics and Statistics",
+        "award_description": [
+            "Offered annually to continuing undergraduate students in the Department of Mathematics and Statistics",
+            "One award offered in each of: Pure Math, Applied Math, and Statistics",
+            "Academic merit."
+        ],
+        "required_criteria": {
+            "Student type": "Undergraduate",
+            "Citizenship/residency": "Any",
+            "Faculty": "Science",
+            "Major": "N/A"
+        },
+        "year_entering": [
+            2,
+            3,
+            4
+        ],
+        "award_information": {
+            "Type of award": "Scholarship",
+            "Internal/external/government": "Internal"
+        }
+    },
+    {
+        "title": "40th Anniversary Undergraduate Alumni Scholarship in Economics",
+        "award_value": 2500,
+        "number_of_awards": 1,
+        "competition_to_apply": "Undergraduate Nominated - Continuing Students",
+        "donor": "Department of Economics, family and friends of Lawrence Copithorne",
+        "award_description": [
+            "Offered annually to a continuing undergraduate student entering third or fourth year in the Faculty of Arts, majoring in the BA Honours program in Economics",
+            "Academic merit."
+        ],
+        "required_criteria": {
+            "Student type": "Undergraduate",
+            "Citizenship/residency": "Any",
+            "Faculty": "Arts",
+            "Major": "N/A"
+        },
+        "year_entering": [
+            3,
+            4
+        ],
+        "award_information": {
+            "Type of award": "Scholarship",
+            "Internal/external/government": "Internal"
+        }
+    },
+    {
+        "title": "54th Students' Legislative Council Student Assistance Bursary",
+        "award_value": 1500,
+        "number_of_awards": 5,
+        "competition_to_apply": "Continuing Undergraduate Awards Competition",
+        "donor": "Students' Union, University of Calgary",
+        "award_description": [
+            "Offered annually to continuing undergraduate students in any faculty. Registered full-time but need not be carrying a full course load",
+            "Two awards are based primarily on academic merit with financial need taken into consideration",
+            "Two awards are based primarily on financial need with academic merit taken into consideration",
+            "One award is based on contribution to student life at the University of Calgary through the Students' Union."
+        ],
+        "required_criteria": {
+            "Student type": "Undergraduate",
+            "Citizenship/residency": "Any",
+            "Faculty": "Any"
+        },
+        "year_entering": [
+            2,
+            3,
+            4
+        ],
+        "award_information": {
+            "Type of award": "Bursary",
+            "Internal/external/government": "Internal"
+        }
+    },
+    {
+        "title": "A Footprint in the Sand Bursary",
+        "award_value": 1750,
+        "number_of_awards": 2,
+        "competition_to_apply": "Continuing Undergraduate Awards Competition",
+        "donor": "Anonymous donation",
+        "award_description": [
+            "Offered annually to continuing undergraduate students majoring in English. Registered full-time but need not be carrying a full course load",
+            "Academic merit",
+            "Financial need."
+        ],
+        "required_criteria": {
+            "Student type": "Undergraduate",
+            "Citizenship/residency": "Any",
+            "Faculty": "Arts",
+            "Major": "N/A"
+        },
+        "year_entering": [
+            2,
+            3,
+            4
+        ],
+        "award_information": {
+            "Type of award": "Bursary",
+            "Internal/external/government": "Internal"
+        }
+    }
+]

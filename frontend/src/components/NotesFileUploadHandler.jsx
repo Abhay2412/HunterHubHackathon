@@ -1,8 +1,8 @@
 // FileUploadHandler.jsx
 import { useNavigate } from 'react-router-dom';
-import PDFUploadPage from '../pages/PDFUploadPage';
+import PDFUploadPage from '../pages/NotesPDFUploadPage';
 
-const FileUploadHandler = ({ onFileSelect }) => {
+const NotesFileUploadHandler = ({ onFileSelect }) => {
     const navigate = useNavigate();
 
     const handleFileSelect = (selectedFile) => {
@@ -15,4 +15,4 @@ const FileUploadHandler = ({ onFileSelect }) => {
     );
 };
 
-export default FileUploadHandler;
+export default NotesFileUploadHandler;
