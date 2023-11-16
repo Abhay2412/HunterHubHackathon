@@ -1,35 +1,26 @@
 import React, { useState } from "react";
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const SummarizerPage = () => {
     const [file, setFile] = useState(null);
-    const [numPages, setNumPages] = useState(null);
 
     function onFileChange(event) {
-        setFile(event.target.files[0]);
-    }
-
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
+        const file = event.target.files[0];
+        if (file) {
+            setFile(URL.createObjectURL(file));
+        }
     }
 
     return (
         <div className="App" style={{ display: "flex", flexDirection: "row", height: "100vh", backgroundColor: "white" }}>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center"}}>
-                <div style={{ overflowY: "scroll", height: "50vh", width: "90%", scrollbarWidth: "thin" }}>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ overflowY: "scroll", height: "50vh", width: "90%" }}>
                     <input type="file" onChange={onFileChange} accept="application/pdf" />
                     {file && (
-                        <Document
-                            file={file}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                        >
-                            {Array.from(new Array(numPages), (el, index) => (
-                                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-                            ))}
-                        </Document>
+                        <iframe 
+                            src={file} 
+                            style={{ width: "100%", height: "100%" }}
+                            title="PDF Viewer"
+                        ></iframe>
                     )}
                 </div>
                 <div style={{ height: "50vh", width: "90%", marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
