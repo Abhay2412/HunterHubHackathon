@@ -6,7 +6,6 @@ import RecommendedPage from './pages/RecommendedPage';
 import ParsePage from './pages/ParsePage';
 import SummarizerPage from './pages/SummarizerPage';
 
-
 import './App.css';
 
 function App() {
