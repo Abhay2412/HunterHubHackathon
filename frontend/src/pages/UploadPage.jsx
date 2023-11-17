@@ -15,10 +15,24 @@ const UploadPage = () => {
     }
   };
 
-  const handleSummarizerClick = () => {
-    if (file) {
-      navigate('/summarizer', { state: { file } });
-    } 
+  const handleSummarizerClick = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const response = await fetch('http://localhost:8000/api/extract-text', {
+            method: 'POST',
+            body: formData,
+        });
+        const data = await response.json();
+        navigate('/summarizer', { state: { data, file } });
+        console.log(data); // Handle the response from the backend
+    } catch (error) {
+        console.error('Error uploading file:', error);
+    }
+
+    
   };
   const handleScholarshipClick = async (e) => {
         e.preventDefault();
