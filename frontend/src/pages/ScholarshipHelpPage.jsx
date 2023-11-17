@@ -212,27 +212,24 @@ const ScholarshipHelpPage = ({ file: uploadedFile }) => {
 //   ];
 
   const theme = {
-    background: "#fff",
-    fontFamily: "Arial, Helvetica, sans-serif",
-    headerBgColor: "#B8E4BC",
-    headerFontColor: "#fff",
-    headerFontSize: "15px",
-    botBubbleColor: "#B8E4BC",
-    // botFontColor: "#fff",
-    botFontColor: "#000",
-    // userBubbleColor: "#315234",
-    userBubbleColor: "#B8E4BC",
-    // userFontColor: "#4A4A4A",
-    userFontColor: "#000",
-  };
-
-  const customStyle = {
-    userBubble: {
-      height: "85%",
-    },
-    botBubble: {
-      maxHeight: "100%",
-    },
+        background: "#fff",
+        fontFamily: "Arial, Helvetica, sans-serif",
+        headerBgColor: "#B8E4BC",
+        headerFontColor: "#fff",
+        headerFontSize: "15px",
+        botBubbleColor: "#B8E4BC",
+        botFontColor: "#fff",
+        userBubbleColor: "#6F9CDE",
+        userFontColor: "#fff",
+    };
+    
+    const customStyle = {
+        userBubble: {
+          height: '85%', 
+        },
+        botBubble: {
+            maxHeight: '100%',
+        },
   };
 
   return (
