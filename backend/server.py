@@ -2,8 +2,9 @@ import time
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-# from pdfminer.high_level import extract_text
+from pdfminer.high_level import extract_text
 import openai
+import io
 from bs4 import BeautifulSoup
 
 # !Initial Setup
@@ -95,3 +96,29 @@ def prompt_scholarship():
 
     result = CustomChatGPT(candidate_resume, scholarship_description)
     return jsonify({"response": result})
+
+# PDF to Text
+@app.route('/api/extract-text', methods=['POST'])
+def extract_text_from_pdf():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if file:
+        # Read the file from the request
+        pdf_file = io.BytesIO(file.read())
+
+        # Extract text using pdfminer
+        text = extract_text(pdf_file)
+        return jsonify({"text": text}), 200
+    
+    
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
