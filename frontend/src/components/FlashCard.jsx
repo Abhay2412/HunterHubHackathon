@@ -23,7 +23,7 @@ const FlashCard = ({ questionContent, answerContent }) => {
       <Card
         className="card-content"
         sx={{
-          backgroundColor: "#3EB489",
+          backgroundColor: "#1a81e8",
           color: "white",
           borderRadius: "20px",
           boxShadow: 20,

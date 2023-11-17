@@ -6,11 +6,19 @@ import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
 const GPTPrompt = (props) => {
   console.log(props);
-  const { steps, triggerNextStep, flashcards, setFlashcards, selectedFile } = props;
+  const {
+    steps,
+    triggerNextStep,
+    flashcards,
+    setFlashcards,
+    selectedFile,
+    setFlashcardsLoading,
+  } = props;
   // const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
@@ -24,9 +32,10 @@ const GPTPrompt = (props) => {
   };
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
+        setFlashcardsLoading(true);
+        setLoading(true);
         const response = await fetch(
           "http://localhost:8000/api/prompt/summary",
           {
@@ -51,12 +60,14 @@ const GPTPrompt = (props) => {
       } catch (error) {
         console.error("Error:", error.message);
       } finally {
+        setFlashcardsLoading(false);
         setLoading(false);
       }
     };
 
     const fetchFlashcards = async () => {
       try {
+        setFlashcardsLoading(true);
         const response = await fetch(
           "http://localhost:8000/api/prompt/flashcards",
           {
@@ -89,14 +100,14 @@ const GPTPrompt = (props) => {
       } catch (error) {
         console.error("Error:", error.message);
       } finally {
-        setLoading(false);
+        setFlashcardsLoading(false);
       }
     };
 
     const wrapper = async () => {
       await fetchData();
       await fetchFlashcards();
-    }
+    };
 
     wrapper();
 
@@ -114,16 +125,22 @@ const GPTPrompt = (props) => {
   };
   return (
     <div className="GPTPrompt" style={{ textAlign: "left", padding: "0 20px" }}>
-      {!loading && <>{renderText(result)}</>}
-      {!loading && (
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: 20,
-          }}
-        >
-          {!trigger && <button onClick={triggerNext}>Ask Again</button>}
-        </div>
+      {loading ? (
+        <>
+          <CircularProgress />
+        </>
+      ) : (
+        <>
+          <>{renderText(result)}</>
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: 20,
+            }}
+          >
+            {!trigger && <button onClick={triggerNext}>Ask Again</button>}
+          </div>
+        </>
       )}
     </div>
   );
@@ -134,7 +151,7 @@ const GPTPromptBaF = (props) => {
   // console.log(props)
   const { steps, triggerNextStep, selectedFile } = props;
   // const GPTPromptBaF = ({ steps, triggerNextStep, uploadedFile }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
   const [trigger, setTrigger] = useState(false);
 
@@ -148,6 +165,7 @@ const GPTPromptBaF = (props) => {
       const msg = steps.msg.value;
 
       try {
+        setLoading(true);
         const response = await fetch(
           "http://localhost:8000/api/prompt/summary-question",
           {
@@ -195,21 +213,25 @@ const GPTPromptBaF = (props) => {
       className="GPTPromptBaF"
       style={{ textAlign: "left", padding: "0 20px" }}
     >
-      {!loading && (
+      {loading ? (
         <>
-          {renderText(result)}
-          {/* // {result} */}
+          <CircularProgress />
         </>
-      )}
-      {!loading && (
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: 20,
-          }}
-        >
-          {!trigger && <button onClick={triggerNext}>Ask Again</button>}
-        </div>
+      ) : (
+        <>
+          <>
+            {renderText(result)}
+            {/* // {result} */}
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: 20,
+              }}
+            >
+              {!trigger && <button onClick={triggerNext}>Ask Again</button>}
+            </div>
+          </>
+        </>
       )}
     </div>
   );
@@ -220,6 +242,7 @@ const SummarizerPage = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedText, setUploadedText] = useState("");
   const [flashcards, setFlashcards] = useState([]);
+  const [flashcardsLoading, setFlashcardsLoading] = useState(false);
 
   useEffect(() => {
     if (location.state && location.state.file) {
@@ -228,7 +251,7 @@ const SummarizerPage = () => {
       fileReader.onload = (e) => {
         setUploadedFile(e.target.result);
       };
-      setUploadedText(location.state.data.text)
+      setUploadedText(location.state.data.text);
     }
     // console.log(location.state.data)
     // console.log(location.state.data.text)
@@ -276,7 +299,12 @@ const SummarizerPage = () => {
     {
       id: "summary",
       component: (
-        <GPTPrompt flashcards={flashcards} setFlashcards={setFlashcards} selectedFile={location.state.data.text}/>
+        <GPTPrompt
+          flashcards={flashcards}
+          setFlashcards={setFlashcards}
+          selectedFile={location.state.data.text}
+          setFlashcardsLoading={setFlashcardsLoading}
+        />
       ),
       asMessage: true,
       waitAction: true,
@@ -308,7 +336,7 @@ const SummarizerPage = () => {
     // Hit GPT endpoint
     {
       id: "query2",
-      component: <GPTPromptBaF selectedFile={location.state.data.text}/>,
+      component: <GPTPromptBaF selectedFile={location.state.data.text} />,
       asMessage: true,
       waitAction: true,
       trigger: "5",
@@ -416,53 +444,60 @@ const SummarizerPage = () => {
             ></iframe>
           )}
         </div>
-        {flashcards && flashcards.length > 0 && (
-          <div
-            style={{
-              height: "20vh",
-              width: "100%",
-              marginTop: "20px",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <FlashCard
-              questionContent={flashcards[activeStep].question}
-              answerContent={flashcards[activeStep].answer}
-            />
-            <MobileStepper
-              variant="progress"
-              steps={flashcards.length}
-              position="static"
-              activeStep={activeStep}
-              sx={{
-                width: "100%",
-                backgroundColor: "transparent",
-                marginTop: "10px",
-              }}
-              nextButton={
-                <Button
-                  style={{ fontWeight: "bolder" }}
-                  size="large"
-                  onClick={handleNext}
-                  disabled={activeStep === flashcards.length - 1}
-                >
-                  Next
-                </Button>
-              }
-              backButton={
-                <Button
-                  style={{ fontWeight: "bolder" }}
-                  size="large"
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  Back
-                </Button>
-              }
-            />
-          </div>
-        )}
+
+        <div
+          style={{
+            height: "20vh",
+            width: "100%",
+            marginTop: "20px",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {flashcards && flashcards.length > 0 && !flashcardsLoading ? (
+            <>
+              <FlashCard
+                questionContent={flashcards[activeStep].question}
+                answerContent={flashcards[activeStep].answer}
+              />
+              <MobileStepper
+                variant="progress"
+                steps={flashcards.length}
+                position="static"
+                activeStep={activeStep}
+                sx={{
+                  width: "100%",
+                  backgroundColor: "transparent",
+                  marginTop: "10px",
+                }}
+                nextButton={
+                  <Button
+                    style={{ fontWeight: "bolder" }}
+                    size="large"
+                    onClick={handleNext}
+                    disabled={activeStep === flashcards.length - 1}
+                  >
+                    Next
+                  </Button>
+                }
+                backButton={
+                  <Button
+                    style={{ fontWeight: "bolder" }}
+                    size="large"
+                    onClick={handleBack}
+                    disabled={activeStep === 0}
+                  >
+                    Back
+                  </Button>
+                }
+              />
+            </>
+          ) : (
+            <>
+              <CircularProgress />
+            </>
+          )}
+        </div>
       </div>
       <div style={{ flex: 1, padding: "10px", height: "100vh" }}>
         <ThemeProvider theme={theme}>

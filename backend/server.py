@@ -332,7 +332,7 @@ def process_resume():
             recommendation_score = scholarship_recommendation(scholarship, student_dict)
 
             if recommendation_score > 0:
-                scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"]})
+                scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"], "year_entering": scholarship["year_entering"]})
         # Sort the list of dictionaries by recommendation_score
         sorted_scholarships = sorted(scholarship_scores, key=lambda x: list(x.values())[0], reverse=True)
 
