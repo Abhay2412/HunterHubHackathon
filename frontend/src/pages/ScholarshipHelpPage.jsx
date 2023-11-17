@@ -73,8 +73,11 @@ const GPTPrompt = (props) => {
     ));
   };
   return (
-    <div className="GPTPrompt">
-      {!loading && <>{renderText(result)}</>}
+    <div className="GPTPrompt" style={{ textAlign: 'left', padding: '0 20px' }}>
+      {!loading && (
+        <>
+        {renderText(result)}</>
+      )}
       {!loading && (
         <div
           style={{
@@ -178,19 +181,31 @@ const GPTPromptBaF = (props) => {
 };
 
 const ScholarshipHelpPage = ({ file: uploadedFile }) => {
-  const steps = [
-    {
-      id: "1",
-      // TODO: Format messages/workflow as deemed appropriate
-      message:
-        "Hello! I am a bot here to help you with your scholarship applications.",
-      trigger: "2",
-    },
-    {
-      id: "2",
-      message:
-        "Here are some sample questions you can ask the bot!\n1. Given the following scholarship description, what sections from my attached file (resume, cover letter, master scholarship document) should I highlight?\n2. Given the following scholarship description and the following scholarship question, draft a response given my file in 100 words or less.\n3. Given the following scholarship description, the following scholarship question and the following response, critique and help me improve my scholarship response while keeping it under 100 words\n4. Summarize the following response to this scholarship question into 200 words or less.",
-      trigger: "3",
+    const steps = [
+      {
+        id: "1",
+        // TODO: Format messages/workflow as deemed appropriate
+        message:
+          "Hello! I am a bot here to help you with your scholarship applications.",
+        trigger: "2",
+      },
+      {
+        id: "2",
+        component: (
+          <span>
+          Here are some sample questions you can ask the bot!
+          <br />
+          1. Given the following scholarship description, what sections from my attached file (resume, cover letter, master scholarship document) should I highlight?
+          <br />
+          2. Given the following scholarship description and the following scholarship question, draft a response given my file in 100 words or less.
+          <br />
+          3. Given the following scholarship description, the following scholarship question and the following response, critique and help me improve my scholarship response while keeping it under 100 words.
+          <br />
+          4. Summarize the following response to this scholarship question into 200 words or less.
+        </span>
+        ),
+        asMessage: true,
+        trigger: "3",
       //   trigger: "3",
     },
     {
@@ -209,37 +224,38 @@ const ScholarshipHelpPage = ({ file: uploadedFile }) => {
     {
       id: "query",
       //   component: <GPTPrompt uploadedFile />,
-      component: <GPTPrompt uploadedFile />,
-      waitAction: true,
-      trigger: "5",
-    },
-    {
-      id: "5",
-      message: "Anything else I can help you with today?",
-      trigger: "6",
-    },
-    {
-      id: "6",
-      options: [
-        // { value: 1, label: "Yes", trigger: "url" },
-        { value: 1, label: "Yes", trigger: "7" },
-        { value: 2, label: "No", trigger: "9" },
-      ],
-    },
-    {
-      id: "7",
-      message: "Go ahead with any other questions you have!",
-      trigger: "msg",
-    },
-    // User input/question/prompt for GPT
-    {
-      id: "msg",
-      user: true,
-      trigger: "query2",
-    },
-    // Hit GPT endpoint
-    {
-      id: "query2",
+        component: <GPTPrompt uploadedFile/>,
+        asMessage: true,
+        waitAction: true,
+        trigger: "5",
+      },
+      {
+        id: "5",
+        message: "Anything else I can help you with today?",
+        trigger: "6",
+      },
+      {
+        id: "6",
+        options: [
+          // { value: 1, label: "Yes", trigger: "url" },
+          { value: 1, label: "Yes", trigger: "7" },
+          { value: 2, label: "No", trigger: "9" },
+        ],
+      },
+      {
+        id: '7',
+        message: 'Go ahead with any other questions you have!',
+        trigger: 'msg',
+      },
+      // User input/question/prompt for GPT
+      {
+        id: 'msg',
+        user: true,
+        trigger: "query2",
+      },
+      // Hit GPT endpoint
+      {
+        id: "query2",
       //   component: <GPTPrompt uploadedFile />,
       component: <GPTPromptBaF uploadedFile />,
       waitAction: true,
@@ -252,25 +268,27 @@ const ScholarshipHelpPage = ({ file: uploadedFile }) => {
     },
   ];
 
-  const theme = {
-    background: "#ede8e4",
-    fontFamily: "Arial, Helvetica, sans-serif",
-    headerBgColor: "#3EB489",
-    headerFontColor: "#fff",
-    headerFontSize: "15px",
-    botBubbleColor: "#3EB489",
-    botFontColor: "#fff",
-    userBubbleColor: "#6F9CDE",
-    userFontColor: "#fff",
+    const theme = {
+      background: "#ede8e4",
+      fontFamily: "Arial, Helvetica, sans-serif",
+      headerBgColor: "#3EB489",
+      headerFontColor: "#fff",
+      headerFontSize: "15px",
+      botBubbleColor: "#3EB489",
+      botFontColor: "#fff",
+      userBubbleColor: "#6F9CDE",
+      userFontColor: "#fff",
+      bubbleStyle: {
+        textAlign: "left", 
+        maxHeight: '100%',
+        padding: "10px", 
+      },
   };
-
-  const customStyle = {
-    userBubble: {
-      height: "85%",
-    },
-    botBubble: {
-      maxHeight: "100%",
-    },
+    
+    const customStyle = {
+        userBubble: {
+          height: '85%', 
+        }
   };
 
   return (
@@ -280,7 +298,7 @@ const ScholarshipHelpPage = ({ file: uploadedFile }) => {
           steps={steps}
           style={{ height: "100vh", width: "100vw" }}
           contentStyle={customStyle.userBubble}
-          bubbleStyle={customStyle.botBubble}
+          bubbleStyle={theme.bubbleStyle}
         />
       </ThemeProvider>
     </div>
