@@ -221,18 +221,18 @@ def process_resume():
         for scholarship in scholarships_dict:
             recommendation_score = scholarship_recommendation(scholarship, student_dict)
 
-            scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"]})
-
+            if recommendation_score > 0:
+                scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"]})
         # Sort the list of dictionaries by recommendation_score
         sorted_scholarships = sorted(scholarship_scores, key=lambda x: list(x.values())[0], reverse=True)
 
         # Keep only the top 5 scholarships
-        top_5_scholarships = sorted_scholarships[:5]
+        top_10_scholarships = sorted_scholarships[:10]
 
         # Print the resulting list of dictionaries
-        print("Top 5 Highest recommended scholarships: ", top_5_scholarships)
+        print("Top 5 Highest recommended scholarships: ", top_10_scholarships)
 
-        return jsonify(top_5_scholarships)
+        return jsonify(top_10_scholarships)
         # return result
 
     except Exception as e:

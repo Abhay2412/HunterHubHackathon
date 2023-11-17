@@ -20,8 +20,22 @@ const UploadPage = () => {
       navigate('/summarizer', { state: { file } });
     } 
   };
-  const handleScholarshipClick = () => {
-    navigate('/recommended-scholarships');
+  const handleScholarshipClick = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('http://localhost:8000/recommended', {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+            navigate('/recommended-scholarships', { state: { data } });
+            console.log(data); // Handle the response from the backend
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
   };
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
