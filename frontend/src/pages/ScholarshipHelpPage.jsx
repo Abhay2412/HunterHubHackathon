@@ -20,8 +20,8 @@ const ScholarshipHelpPage = () => {
         headerFontSize: "15px",
         botBubbleColor: "#B8E4BC",
         botFontColor: "#fff",
-        userBubbleColor: "#315234",
-        userFontColor: "#4A4A4A",
+        userBubbleColor: "#6F9CDE",
+        userFontColor: "#fff",
     };
     
     const customStyle = {
