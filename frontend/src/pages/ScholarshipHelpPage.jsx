@@ -180,7 +180,7 @@ const GPTPromptBaF = (props) => {
   );
 };
 
-const ScholarshipHelpPage = ({ file: uploadedFile }) => {
+const ScholarshipHelpPage = () => {
   const steps = [
     {
       id: "1",
