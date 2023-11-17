@@ -22,7 +22,7 @@ function App() {
                     <Route path="/prompt" element={<GPTPromptPage />} />
                     <Route path="/scholarship-help" element={<ScholarshipHelpPage />} />
                     <Route path="/recommended-scholarships" element={<RecommendedPage />} />
-                    <Route path="/parse" element={<ParsePage />} />
+                    <Route path="/scholarship-resume" element={<ParsePage />} />
                     <Route path="/summarizer" element={<SummarizerPage file={file} />} />
                     <Route path="/upload-notes" element={<FileUploadHandler onFileSelect={setNoteSummarizerFile} />} />
                 </Routes>

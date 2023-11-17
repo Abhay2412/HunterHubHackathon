@@ -1,11 +1,20 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'
 import CustomTypeAnimation from '../components/typingAnimation';
 
 function HomePage() {
-  
+  const navigate = useNavigate();
+
+  const handleUploadStartLearningButtonClick = () => {
+    navigate('/upload-notes');
+  };
+
+  const handleWriteScholarshipApplicationButtonClick = () => {
+    navigate('/scholarship-resume');
+  };
+
   const backgroundStyle = {
     position: 'fixed',
     top: 0,
@@ -41,12 +50,12 @@ function HomePage() {
       {/* Buttons stacked on top of each other */}
       <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
         <motion.div whileHover={{ scale: 1.1 }}>
-        <Button variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
+        <Button variant="contained" onClick={handleUploadStartLearningButtonClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
           Upload & Start Learning! <span>&#x2192;</span>
         </Button>
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }}>
-        <Button variant="outlined" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
+        <Button variant="outlined" onClick={handleWriteScholarshipApplicationButtonClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
           Write Scholarship Applications <span>&#x2192;</span>
         </Button>
         </motion.div>
