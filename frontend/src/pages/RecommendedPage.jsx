@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardActions, Typography, IconButton, Collapse, Grid, CardMedia, Pagination } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
-import UniversityOfCalgaryScholarships from '../scholarships_dummy_data.json';
+import {useLocation} from 'react-router-dom';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -17,6 +17,8 @@ const ExpandMore = styled((props) => {
 }));
 
 const RecommendedPage = () => {
+  const location = useLocation();
+  const UniversityOfCalgaryScholarships = location.state.data
   const [expandedIds, setExpandedIds] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
@@ -57,7 +59,7 @@ const RecommendedPage = () => {
                   <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: 'white' }}>{scholarship.title}</Typography>
                   <Typography variant="body2" style={{ fontWeight: 'bold', color: 'black' }}>Value: ${scholarship.award_value}</Typography>
                   <Typography variant="body2" style={{ fontWeight: 'bold', color: 'black' }}>Number of Awards: {scholarship.number_of_awards}</Typography>
-                  <Typography variant="body2" style={{ fontWeight: 'bold', color: 'black' }}>Year Entering: {scholarship.year_entering.join(', ')}</Typography>
+                  <Typography variant="body2" style={{ fontWeight: 'bold', color: 'black' }}>Year Entering: {scholarship.year_entering.join(',')}</Typography>
                 </CardContent>
                 <CardActions disableSpacing>
                   <ExpandMore expand={expandedIds.includes(scholarship.title)} onClick={() => handleExpandClick(scholarship.title)} aria-expanded={expandedIds.includes(scholarship.title)} aria-label="show more">
