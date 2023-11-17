@@ -20,14 +20,18 @@ const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick
         type="file"
         onChange={handleFileChange}
         accept="application/pdf"
-        style={{ display: 'block', marginBottom: '10px' }}
+        style={{ display: 'block', marginBottom: '20px' }}
       />
        <motion.div whileHover={{ scale: 1.1 }}>
-        <Button variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
-          Summarize & Learn! <span>&#x2192;</span>
-        </Button>
+          <Button variant="contained" onClick={onSummarizerClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
+            Summarize & Learn! <span>&#x2192;</span>
+          </Button>
         </motion.div>
-      <button onClick={onScholarshipClick}>Scholarship</button>
+        <motion.div whileHover={{ scale: 1.1 }}>
+          <Button variant="outlined" onClick={onScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
+            Scholarship Application Help <span>&#x2192;</span>
+          </Button>
+        </motion.div>
     </div>
   );
 };
