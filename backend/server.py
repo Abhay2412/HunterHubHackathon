@@ -49,7 +49,7 @@ def jobs():
 
 # Hit ChatGPT endpoint with query prompt and files saved locally
 
-def CustomChatGPT(candidate_resume, scholarship_info):
+def generate_scholarship_essay(candidate_resume, scholarship_info):
     messages = [
         {"role": "system", "content": "Based on the Candidate's resume and scholarship information, you are going to write a scholarship application for this candidate."},
         {"role": "user", "content": f"Candidate Resume: {candidate_resume}\nScholarship Information: {scholarship_info}"}
@@ -94,7 +94,7 @@ def prompt_scholarship():
     if not candidate_resume or not scholarship_url:
         return jsonify({"error": "Missing candidate_resume or scholarship_url"}), 400
 
-    result = CustomChatGPT(candidate_resume, scholarship_description)
+    result = generate_scholarship_essay(candidate_resume, scholarship_description)
     return jsonify({"response": result})
 
 # PDF to Text
@@ -114,6 +114,43 @@ def extract_text_from_pdf():
         # Extract text using pdfminer
         text = extract_text(pdf_file)
         return jsonify({"text": text}), 200
+    
+messages = []
+
+def continous_chat(user_input, candidate_resume, scholarship_info):
+    global messages
+
+    messages.append({"role": "user", "content": user_input})
+    messages.append({"role": "user", "content": f"Candidate Resume: {candidate_resume}\nScholarship Information: {scholarship_info}"})
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-1106-preview",
+            messages=messages
+        )
+
+        ChatGPT_reply = response.choices[0].message.content
+        messages.append({"role": "assistant", "content": ChatGPT_reply})
+
+        return ChatGPT_reply
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "Sorry, I encountered an error."
+
+@app.route('/api/prompt/scholarship-question', methods=['POST'])
+def chat():
+    data = request.json
+    user_input = data.get('message')
+    candidate_resume = data.get('candidate_resume')
+    scholarship_url = data.get('scholarship_url')
+    page_content = scrape_entire_page(scholarship_url)
+    scholarship_description = query_gpt4_for_scholarship_description(page_content)
+    if not user_input:
+        return jsonify({"error": "No message provided"}), 400
+
+    reply = continous_chat(user_input, candidate_resume, scholarship_description)
+    return jsonify({"reply": reply})
+
     
     
 @app.after_request
