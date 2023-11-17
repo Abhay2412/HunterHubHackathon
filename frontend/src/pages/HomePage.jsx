@@ -49,7 +49,7 @@ function HomePage() {
       {/* Buttons stacked on top of each other */}
       <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
         <motion.div animate={bounceAnimation}>
-        <Link to={"/upload-notes"}>
+        <Link to={"/upload"}>
           <Button variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
             Get Started! <span>&#x2192;</span>
           </Button>

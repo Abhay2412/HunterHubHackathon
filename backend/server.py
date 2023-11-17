@@ -67,6 +67,116 @@ def jobs():
 # def parse():
 #         text = extract_text(file)
 
+# !Summarizer
+# Hit ChatGPT endpoint with query prompt and files saved locally
+
+def generate_document_summary(candidate_document):
+    messages = [
+        {"role": "system", "content": 
+        """
+        Carefully examine the provided class, lecture note, or paper. Your task is to produce a detailed and in-depth summary that encapsulates the core content and key points. This summary should not only be comprehensive, covering all significant aspects and arguments presented in the material, but also insightful, identifying any underlying themes, methodologies, or theoretical frameworks.
+
+        In addition to the summary, please provide a clear and thorough explanation of the main concepts discussed in the text. Break down any complex ideas or technical jargon into simpler terms, ensuring that the explanations are accessible to a general audience without prior knowledge of the subject.
+
+        Your output should be extensive, delving into the nuances of the material. Highlight critical analyses, comparisons, or contrasts made in the text, and discuss the implications or potential applications of the ideas presented. If the material includes data, studies, or experimental results, interpret these elements and explain their relevance to the overall topic.
+
+        Finally, conclude with your own insights or reflections on the material, considering its significance in the broader context of the field or subject area. This final part should tie together the key points and concepts, offering a cohesive understanding of the text as a whole.
+         """
+        },
+        {"role": "user", "content": f"Candidate Document: {candidate_document}"},
+        {"role": "user", "content": f"Please do not use any markdown syntax. So please return in plaintext"}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4-1106-preview",
+        messages=messages
+    )
+
+    ChatGPT_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": ChatGPT_reply})
+
+    return ChatGPT_reply
+
+
+
+
+@app.route('/api/prompt/summary', methods=['POST'])
+def prompt_summary():
+    data = request.json
+    candidate_document = data.get('candidate_document')
+
+    if not candidate_document:
+        return jsonify({"error": "Missing candidate_document"}), 400
+
+    result = generate_document_summary(candidate_document)
+    return jsonify({"response": result})
+    
+messages_summary = []
+
+def continous_chat_summary(user_input, candidate_document):
+    global messages_summary
+
+    messages_summary.append({"role": "user", "content": user_input})
+    messages_summary.append({"role": "user", "content": f"Candidate Document: {candidate_document}"})
+    messages_summary.append({"role": "user", "content": f"Please do not use any markdown syntax. So please return in plaintext"})
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-1106-preview",
+            messages=messages_summary
+        )
+
+        ChatGPT_reply = response.choices[0].message.content
+        messages_summary.append({"role": "assistant", "content": ChatGPT_reply})
+
+        return ChatGPT_reply
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "Sorry, I encountered an error."
+
+@app.route('/api/prompt/summary-question', methods=['POST'])
+def chat_summary():
+    data = request.json
+    user_input = data.get('message')
+    candidate_document = data.get('candidate_document')
+    if not user_input:
+        return jsonify({"error": "No message provided"}), 400
+
+    reply = continous_chat_summary(user_input, candidate_document)
+    return jsonify({"reply": reply})
+
+
+def generate_document_flashcards(candidate_document):
+    messages = [
+        {"role": "system", "content": 
+            "Please read the provided technical document carefully and create 10 flash cards based on its content, formatted in JSON. Each flash card should feature a key concept, term, or principle from the document. Format each card with a question that targets a specific aspect of the document, followed by an answer that concisely explains or defines it. Ensure that the flash cards cover a range of topics to provide a comprehensive understanding of the document's subject matter. Present the flash cards in a JSON array, with each card as a separate object containing 'question' and 'answer' fields."
+        },
+        {"role": "user", "content": f"Candidate Document: {candidate_document}"},
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4-1106-preview",
+        messages=messages
+    )
+
+    ChatGPT_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": ChatGPT_reply})
+
+    return ChatGPT_reply
+
+
+@app.route('/api/prompt/flashcards', methods=['POST'])
+def prompt_flashcards():
+    data = request.json
+    candidate_document = data.get('candidate_document')
+
+    if not candidate_document:
+        return jsonify({"error": "Missing candidate_document"}), 400
+
+    result = generate_document_flashcards(candidate_document)
+    return jsonify({"response": result})
+
+# !Scholarships
 # Hit ChatGPT endpoint with query prompt and files saved locally
 
 def generate_scholarship_essay(candidate_resume, scholarship_info):
