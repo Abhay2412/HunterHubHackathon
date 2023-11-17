@@ -3,16 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import PDFUploadPage from '../pages/NotesPDFUploadPage';
 
 const NotesFileUploadHandler = ({ onFileSelect }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleFileSelect = (selectedFile) => {
-        onFileSelect(selectedFile);
-        navigate('/summarizer');
-    };
+  const handleFileSelect = (selectedFile) => {
+    onFileSelect(selectedFile);
+  };
 
-    return (
-        <PDFUploadPage onFileSelect={handleFileSelect} />
-    );
+  const handleSummarizerClick = () => {
+    navigate('/summarizer');
+  };
+
+  const handleScholarshipClick = () => {
+    navigate('/recommended-scholarships');
+  };
+
+  return (
+    <PDFUploadPage onFileSelect={handleFileSelect} onSummarizerClick={handleSummarizerClick} onScholarshipClick={handleScholarshipClick} />
+  );
 };
 
 export default NotesFileUploadHandler;

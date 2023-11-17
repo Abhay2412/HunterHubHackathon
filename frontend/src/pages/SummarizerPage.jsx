@@ -27,6 +27,11 @@ const SummarizerPage = ({ file: uploadedFile }) => {
         {
             id: '1',
             message: 'Hello! I am your summarizer chatbot. I can help you summarize your PDF notes.',
+            trigger: '2',
+        },
+        {
+            id: '2',
+            user: true,
             end: true,
         },
     ];
@@ -48,8 +53,8 @@ const SummarizerPage = ({ file: uploadedFile }) => {
         headerFontSize: "15px",
         botBubbleColor: "#3EB489",
         botFontColor: "#fff",
-        userBubbleColor: "#315234",
-        userFontColor: "#4A4A4A",
+        userBubbleColor: "#6F9CDE",
+        userFontColor: "#fff",
     };
 
     const [activeStep, setActiveStep] = useState(0);
