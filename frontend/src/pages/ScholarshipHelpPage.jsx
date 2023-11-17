@@ -53,7 +53,7 @@ const GPTPrompt = (props) => {
         console.log(resultData);
         console.log(printParagraphs(resultData.response));
         
-        setResult(printParagraphs(resultData.response));
+        setResult(resultData.response);
       } catch (error) {
         console.error("Error:", error.message);
       } finally {
@@ -64,10 +64,21 @@ const GPTPrompt = (props) => {
     // triggetNext()
   }, []);
   //   }, [steps.query.value, uploadedFile]);
-
+  
+  const renderText = (inputText) => {
+    return inputText.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
   return (
     <div className="GPTPrompt">
-      {!loading && result}
+      {!loading && (
+        <>
+        {renderText(result)}</>
+      )}
       {!loading && (
         <div
           style={{
