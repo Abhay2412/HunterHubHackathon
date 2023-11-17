@@ -1,9 +1,11 @@
 // RecommendedPage.jsx
 import React, { useState } from 'react';
-import { Card, CardContent, CardActions, Typography, IconButton, Collapse, Grid, CardMedia, Pagination } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, IconButton, Collapse, Grid, CardMedia, Pagination, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { styled } from '@mui/material/styles';
-import {useLocation} from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import { motion } from 'framer-motion'
+import UniversityOfCalgaryScholarships from '../scholarships_dummy_data.json'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -18,7 +20,6 @@ const ExpandMore = styled((props) => {
 
 const RecommendedPage = () => {
   const location = useLocation();
-  const UniversityOfCalgaryScholarships = location.state.data
   const [expandedIds, setExpandedIds] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
@@ -50,7 +51,18 @@ const RecommendedPage = () => {
     }}>
       <div style={{ textAlign: 'center', padding: '20px', zIndex: 1, position: 'relative' }}>
         <Typography variant="h4" style={{ marginBottom: '12px', display: 'inline-block', fontFamily: "cursive", color: "white", fontWeight: "bolder", boxShadow: '0 0 20px 0 rgba(0, 0, 0, 1)', borderRadius: '12px', backgroundColor: "#3EB489", lineHeight: 1.4, letterSpacing: 2}}>Recommended Scholarships</Typography>
-        <Grid container spacing={2} justifyContent="center">
+        { UniversityOfCalgaryScholarships.length == 5 ? <>
+          <Typography variant='h1'>No Recommended Scholarships Found</Typography>
+          <Link to={"/scholarship-help"}>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Button color='primary' variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', color: "white", textTransform: "none"}}>
+              Get Scholarship Help! <span>&#x2192;</span>
+            </Button>
+          </motion.div>
+          </Link>
+          </> :
+          <>
+            <Grid container spacing={2} justifyContent="center">
           {currentItems.map((scholarship) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={scholarship.title}>
               <Card style={{ backgroundColor: '#3EB489', color: 'black', marginBottom: '20px', borderRadius: '15px' }}>
@@ -74,9 +86,18 @@ const RecommendedPage = () => {
                   </CardContent>
                 </Collapse>
               </Card>
+              <Link to={"/scholarship-help"}>
+                <motion.div whileHover={{ scale: 1.1 }}>
+                <Button color='primary' variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', color: "white", textTransform: "none"}}>
+                  Get Scholarship Help! <span>&#x2192;</span>
+                </Button>
+                </motion.div>
+              </Link>
             </Grid>
           ))}
         </Grid>
+          </>
+        }
         <Pagination count={pageCount} page={page} onChange={handleChangePage} color="primary" style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }} disabled={pageCount <= 1} />
       </div>
     </div>
