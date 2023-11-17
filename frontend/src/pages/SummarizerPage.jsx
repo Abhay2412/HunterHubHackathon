@@ -40,9 +40,6 @@ const SummarizerPage = ({ file: uploadedFile }) => {
         userBubble: {
           height: '85%', 
         },
-        botBubble: {
-          maxWidth: '100%', 
-        },
       };
 
     const theme = {
@@ -55,6 +52,12 @@ const SummarizerPage = ({ file: uploadedFile }) => {
         botFontColor: "#fff",
         userBubbleColor: "#6F9CDE",
         userFontColor: "#fff",
+        bubbleStyle: {
+            textAlign: "left", 
+            maxHeight: '100%',
+            maxWidth: '100%', 
+            padding: "10px", 
+          },
     };
 
     const [activeStep, setActiveStep] = useState(0);
@@ -120,7 +123,7 @@ const SummarizerPage = ({ file: uploadedFile }) => {
                 </div>
             </div>
             <div style={{ flex: 1, padding: "10px", height: "100vh"}}>
-            <ThemeProvider theme={theme}> <ChatBot steps={steps} style={{ height: '100vh', width: '100%' }} contentStyle={customStyle.userBubble} bubbleStyle={customStyle.botBubble}/> </ThemeProvider>
+            <ThemeProvider theme={theme}> <ChatBot steps={steps} style={{ height: '100vh', width: '100%' }} contentStyle={customStyle.userBubble} bubbleStyle={theme.bubbleStyle}/> </ThemeProvider>
             </div>
         </div>
     );
