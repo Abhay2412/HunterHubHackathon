@@ -5,6 +5,7 @@ import FlashCard from "../components/FlashCard";
 import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const dummyFlashCards = [
     { questionContent: "What is an ecosystem?", answerContent: "A community of living organisms and their environment." },
@@ -13,16 +14,19 @@ const dummyFlashCards = [
     { questionContent: "What role do decomposers play?", answerContent: "Breaking down organic matter and recycling nutrients." }
   ];
 
-const SummarizerPage = ({ file: uploadedFile }) => {
-    const [fileUrl, setFileUrl] = useState(null);
+const SummarizerPage = () => {
+  const location = useLocation();
+  const [uploadedFile, setUploadedFile] = useState(null);
 
-    useEffect(() => {
-        if (uploadedFile) {
-            const newFileUrl = URL.createObjectURL(uploadedFile);
-            setFileUrl(newFileUrl);
-        }
-    }, [uploadedFile]);
-
+  useEffect(() => {
+    if (location.state && location.state.file) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(location.state.file);
+      fileReader.onload = (e) => {
+        setUploadedFile(e.target.result);
+      };
+    }
+  }, [location]);
     const steps = [
         {
             id: '1',
@@ -90,9 +94,9 @@ const SummarizerPage = ({ file: uploadedFile }) => {
             <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", zIndex: 1}}>
                 <Typography variant="h4" style={{ marginBottom: '12px', marginRight: 'auto', maxWidth: 'fit-content', fontFamily: "cursive", color: "white", fontWeight: "bolder", boxShadow: '0 0 20px 0 rgba(0, 0, 0, 1)', borderRadius: '12px', backgroundColor: "#3EB489", lineHeight: 1.4, letterSpacing: 2}}>Scholarly - Learning!</Typography>
                 <div style={{ overflowY: "scroll", height: "80vh", width: "90%" }}>
-                    {fileUrl && (
+                    {uploadedFile && (
                         <iframe 
-                            src={fileUrl} 
+                            src={uploadedFile} 
                             style={{ width: "100%", height: "100%" }}
                             title="PDF Viewer"
                         ></iframe>

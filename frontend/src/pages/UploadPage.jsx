@@ -1,19 +1,31 @@
-// PDFUploadComponent.jsx
+// UploadPage.jsx
 import React from 'react';
 import { Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion'
-import { Link, NavLink } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick }) => {
+const UploadPage = () => {
+  const navigate = useNavigate();
+  const [file, setFile] = React.useState(null);
+
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      onPDFUpload(file);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
     }
   };
 
+  const handleSummarizerClick = () => {
+    if (file) {
+      navigate('/summarizer', { state: { file } });
+    } 
+  };
+  const handleScholarshipClick = () => {
+    navigate('/recommended-scholarships');
+  };
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
       <div
           className="background-image"
           style={{
@@ -39,24 +51,25 @@ const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick
         style={{ display: 'block', marginBottom: '20px' }}
       />
        <motion.div whileHover={{ scale: 1.1 }}>
-          <Button variant="contained" onClick={onSummarizerClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
+          <Button variant="contained" onClick={handleSummarizerClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', backgroundColor: "#3EB489", color: "white", textTransform: "none"}}>
             Summarize & Learn! <span>&#x2192;</span>
           </Button>
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }}>
-          <Button variant="outlined" onClick={onScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
+          <Button variant="outlined" onClick={handleScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
             Scholarship Application Help <span>&#x2192;</span>
           </Button>
         </motion.div>
         <motion.div whileHover={{ scale: 1.1 }}>
         <Link to={"/"}>
-          <Button color='primary' variant="contained" onClick={onScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', textTransform: "none"}}>
+          <Button color='primary' variant="contained" style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', textTransform: "none"}}>
           <span>&#x2190;</span> Back Home
           </Button>
         </Link>
         </motion.div>
     </div>
+    </div>
   );
 };
 
-export default PDFUploadComponent;
+export default UploadPage;
