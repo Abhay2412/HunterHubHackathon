@@ -52,7 +52,8 @@ def jobs():
 def generate_scholarship_essay(candidate_resume, scholarship_info):
     messages = [
         {"role": "system", "content": "Based on the Candidate's resume and scholarship information, you are going to write a scholarship application for this candidate."},
-        {"role": "user", "content": f"Candidate Resume: {candidate_resume}\nScholarship Information: {scholarship_info}"}
+        {"role": "user", "content": f"Candidate Resume: {candidate_resume}\nScholarship Information: {scholarship_info}"},
+        {"role": "user", "content": f"Please do not use any markdown syntax. So please return in plaintext"}
     ]
 
     response = openai.ChatCompletion.create(
@@ -122,6 +123,7 @@ def continous_chat(user_input, candidate_resume, scholarship_info):
 
     messages.append({"role": "user", "content": user_input})
     messages.append({"role": "user", "content": f"Candidate Resume: {candidate_resume}\nScholarship Information: {scholarship_info}"})
+    messages.append({"role": "user", "content": f"Please do not use any markdown syntax. So please return in plaintext"})
 
     try:
         response = openai.ChatCompletion.create(
