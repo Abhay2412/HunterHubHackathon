@@ -13,6 +13,21 @@ const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column' }}>
+      <div
+          className="background-image"
+          style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", // Add the URL of your background image
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          opacity: 0.8,
+          zIndex: -1
+          }}
+        />
       <Typography variant="h2" align="center" sx={{fontFamily: "inherit", fontStyle: "italic", fontWeight: "lighter"}} gutterBottom>
         Upload Your File & {" "} <span style={{fontFamily: "cursive", color: "#3EB489", fontWeight: "bold"}}>Succeed</span>
       </Typography>
