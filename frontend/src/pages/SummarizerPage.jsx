@@ -217,7 +217,7 @@ const GPTPromptBaF = (props) => {
   );
 };
 
-const SummarizerPage = ({ file: uploadedFile }) => {
+const SummarizerPage = () => {
   const location = useLocation();
   const [uploadedFile, setUploadedFile] = useState(null);
   const [flashcards, setFlashcards] = useState([]);
@@ -405,9 +405,9 @@ const SummarizerPage = ({ file: uploadedFile }) => {
           Scholarly - Learning!
         </Typography>
         <div style={{ overflowY: "scroll", height: "80vh", width: "90%" }}>
-          {fileUrl && (
+          {uploadedFile && (
             <iframe
-              src={fileUrl}
+              src={uploadedFile}
               style={{ width: "100%", height: "100%" }}
               title="PDF Viewer"
             ></iframe>
