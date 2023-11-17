@@ -7,6 +7,24 @@ import openai
 import io
 from bs4 import BeautifulSoup
 
+# Jacob
+import time
+import requests
+from flask import Flask, request, jsonify, request, jsonify
+from flask_cors import CORS
+from pdfminer.high_level import extract_text
+import sys
+import openai
+import io
+from bs4 import BeautifulSoup
+import sys
+from parse import extract_text_pdf_whitespaced, load_jobs, load_skills, extract_company_names, extract_education_section, extract_email, extract_faculty, extract_GPA, extract_jobs, extract_name, extract_phone, extract_skills, extract_text, extract_text_pdf_nonwhitespaced,extract_year_entering, add_jobs, add_skills
+from pdfminer.high_level import extract_text
+import spacy
+from spacy.matcher import Matcher
+from spacy import displacy
+from spacy.pipeline.entityruler import EntityRuler
+
 # !Initial Setup
 app = Flask(__name__)
 CORS(app)
@@ -153,6 +171,65 @@ def chat():
     reply = continous_chat(user_input, candidate_resume, scholarship_description)
     return jsonify({"reply": reply})
 
+
+@app.route('/parse', methods=['POST'])
+def process_resume():
+    try:
+        # file = request.files['file']
+
+        # Load the pre-trained spaCy English NLP model
+        nlp = spacy.load("en_core_web_lg")
+        matcher = Matcher(nlp.vocab)
+
+        # # Get resume text from the request
+        # print("heyhey")
+        # resume_text = extract_text(file)
+        
+        data = request.json
+        resume_text = data.get('resume')
+
+        print("Resume text: ", resume_text)
+
+        # Process the resume text
+        # names = extract_name(resume_text)
+        # phones = extract_phone(resume_text)
+        # emails = extract_email(resume_text)
+        education_section = extract_education_section(resume_text)
+        faculty = extract_faculty(education_section)
+        year_entering = extract_year_entering(education_section)
+        gpa = extract_GPA(education_section)
+        company_names = extract_company_names(resume_text)
+
+        technical_skills_patterns = load_skills("../scripts/jz_skill_patterns.jsonl")
+        add_skills(technical_skills_patterns, matcher)
+        technical_skills = extract_skills(resume_text, matcher)
+
+        soft_skills_patterns = load_skills("../scripts/soft_skill_patterns.jsonl")
+        add_skills(soft_skills_patterns, matcher)
+        soft_skills = extract_skills(resume_text, matcher)
+
+        # Assuming you want to return the extracted information
+        result = {
+            # "names": names,
+            # "phones": phones,
+            # "emails": emails,
+            "technical skills": technical_skills,
+            "soft skills": soft_skills,
+            "faculty": faculty,
+            "year_entering": year_entering,
+            "gpa": gpa,
+            # "jobs": jobs,
+            "company_names": company_names
+        }
+
+        print(result)
+
+        return jsonify({"result": result})
+        # return result
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
     
     
 @app.after_request

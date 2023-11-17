@@ -307,6 +307,10 @@ const ScholarshipHelpPage = ({ file: uploadedFile }) => {
           style={{ height: "100vh", width: "100vw" }}
           contentStyle={customStyle.userBubble}
           bubbleStyle={theme.bubbleStyle}
+          // Talks out speech out loud
+          speechSynthesis={{ enable: true, lang: 'en' }}
+          // TODO: Recognize voice to text
+          // recognitionEnable={true}
         />
       </ThemeProvider>
     </div>
