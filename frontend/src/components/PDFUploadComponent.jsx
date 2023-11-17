@@ -2,6 +2,7 @@
 import React from 'react';
 import { Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion'
+import { Link, NavLink } from "react-router-dom";
 
 const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick }) => {
   const handleFileChange = (event) => {
@@ -46,6 +47,13 @@ const PDFUploadComponent = ({ onPDFUpload, onSummarizerClick, onScholarshipClick
           <Button variant="outlined" onClick={onScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', border: "2px solid black", color: "black", textTransform: "none"}}>
             Scholarship Application Help <span>&#x2192;</span>
           </Button>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }}>
+        <Link to={"/"}>
+          <Button color='primary' variant="contained" onClick={onScholarshipClick} style={{ marginBottom: '10px', borderRadius: '15px', fontSize: '1.4rem', textTransform: "none"}}>
+          <span>&#x2190;</span> Back Home
+          </Button>
+        </Link>
         </motion.div>
     </div>
   );
