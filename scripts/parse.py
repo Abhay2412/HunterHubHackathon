@@ -2,6 +2,7 @@ import spacy
 import re
 import json
 from pdfminer.high_level import extract_text
+import io
 from spacy.matcher import Matcher
 from spacy import displacy
 from spacy.pipeline.entityruler import EntityRuler

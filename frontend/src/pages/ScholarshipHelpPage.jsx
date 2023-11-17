@@ -76,140 +76,63 @@ const GPTPrompt = (props) => {
   );
 };
 
-// const steps = [
-//   {
-//     id: "1",
-//     message: "Hello!",
-//     trigger: "2",
-//   },
-//   {
-//     id: "2",
-//     user: true,
-//     trigger: "3",
-//   },
-//   {
-//     id: "3",
-//     message: "You said: {previousValue}",
-//     trigger: "2",
-//   },
-// ];
 
 const ScholarshipHelpPage = ({ file: uploadedFile }) => {
-  //   const steps = [
-  //     {
-  //       id: "1",
-  //       // TODO: Format messages/workflow as deemed appropriate
-  //       message:
-  //         "Hello! I am a bot here to help you with your scholarship applications. How can I assist you?",
-  //       trigger: "2",
-  //     },
-  //     {
-  //       id: "2",
-  //       message:
-  //         "Here are some sample questions you can ask the bot!\n1. Given the following scholarship description, what sections from my attached file (resume, cover letter, master scholarship document) should I highlight?\n2. Given the following scholarship description and the following scholarship question, draft a response given my file in 100 words or less.\n3. Given the following scholarship description, the following scholarship question and the following response, critique and help me improve my scholarship response while keeping it under 100 words\n4. Summarize the following response to this scholarship question into 200 words or less.",
-  //       trigger: "url",
-  //     //   trigger: "3",
-  //     },
-  //     {
-  //         id: "url",
-  //         message: "Please provide a scholarship URL you want to apply to!",
-  //         trigger: '3'
+    const steps = [
+      {
+        id: "1",
+        // TODO: Format messages/workflow as deemed appropriate
+        message:
+          "Hello! I am a bot here to help you with your scholarship applications.",
+        trigger: "2",
+      },
+      {
+        id: "2",
+        message:
+          "Here are some sample questions you can ask the bot!\n1. Given the following scholarship description, what sections from my attached file (resume, cover letter, master scholarship document) should I highlight?\n2. Given the following scholarship description and the following scholarship question, draft a response given my file in 100 words or less.\n3. Given the following scholarship description, the following scholarship question and the following response, critique and help me improve my scholarship response while keeping it under 100 words\n4. Summarize the following response to this scholarship question into 200 words or less.",
+        trigger: "url",
+      //   trigger: "3",
+      },
+      {
+          id: "url",
+          message: " Please provide the URL to the scholarship you are applying too!",
+          trigger: '3'
 
-  //     },
-  //     // User input/question/prompt for GPT
-  //     {
-  //       id: "3",
-  //       user: true,
-  //       trigger: "query",
-  //     },
-  //     // Hit GPT endpoint
-  //     {
-  //       id: "query",
-  //     //   component: <GPTPrompt uploadedFile />,
-  //       component: <GPTPrompt uploadedFile/>,
-  //       waitAction: true,
-  //       trigger: "5",
-  //     },
-  //     {
-  //       id: "5",
-  //       message: "Anything else I can help you with today?",
-  //       trigger: "6",
-  //     },
-  //     {
-  //       id: "6",
-  //       options: [
-  //         // { value: 1, label: "Yes", trigger: "url" },
-  //         { value: 1, label: "Yes", trigger: "3" },
-  //         { value: 2, label: "No", trigger: "7" },
-  //       ],
-  //     },
-  //     {
-  //       id: "7",
-  //       message: "Thank you for using Scholarly!",
-  //       end: true,
-  //     },
-  //   ];
+      },
+      // User input/question/prompt for GPT
+      {
+        id: "3",
+        user: true,
+        trigger: "query",
+      },
+      // Hit GPT endpoint
+      {
+        id: "query",
+      //   component: <GPTPrompt uploadedFile />,
+        component: <GPTPrompt uploadedFile/>,
+        waitAction: true,
+        trigger: "5",
+      },
+      {
+        id: "5",
+        message: "Anything else I can help you with today?",
+        trigger: "6",
+      },
+      {
+        id: "6",
+        options: [
+          // { value: 1, label: "Yes", trigger: "url" },
+          { value: 1, label: "Yes", trigger: "3" },
+          { value: 2, label: "No", trigger: "7" },
+        ],
+      },
+      {
+        id: "7",
+        message: "Thank you for using Scholarly!",
+        end: true,
+      },
+    ];
 
-  const steps = [
-    {
-      id: '1',
-      message: 'Hello my friend, please tell me your name?',
-      trigger: '2',
-    },
-    {
-      id: '2',
-      user: true,
-      trigger: '3'
-    },
-    {
-      id: '3',
-      message: 'Please select your profession?',
-      trigger: '4'
-    },
-    {
-      id: '4',
-      options: [
-        { value: 'engineer', label: 'Engineer', trigger: '5' },
-        { value: 'doctor', label: 'Doctor', trigger: '5' },
-        { value: 'selfEmployed', label: 'Self Employed', trigger: '5' }
-      ],
-    },
-    {
-      id: '5',
-      message: 'That\'s Good!!',
-      end: true
-    }
-  ];
-//   const steps = [
-//     {
-//       id: "1",
-//       // TODO: Format messages/workflow as deemed appropriate
-//       message:
-//         "Hello! I am a bot here to help you with your scholarship applications. How can I assist you? Please enter scholarship URL?",
-//       trigger: "sco",
-//     },
-//     // User input/question/prompt for GPT
-//     {
-//       id: "sco",
-//       user: true,
-//       trigger: "2",
-//     },
-//     {
-//       id: "2",
-//       message:
-//         "Here are some sample questions you can ask the bot!\n1. Given the following scholarship description, what sections from my attached file (resume, cover letter, master scholarship document) should I highlight?\n2. Given the following scholarship description and the following scholarship question, draft a response given my file in 100 words or less.\n3. Given the following scholarship description, the following scholarship question and the following response, critique and help me improve my scholarship response while keeping it under 100 words\n4. Summarize the following response to this scholarship question into 200 words or less.",
-//       //   trigger: "url",
-//       trigger: "3",
-//       // end: true,
-//     },
-//     // User input/question/prompt for GPT
-//     {
-//       id: "3",
-//       user: true,
-//       //   trigger: "query",
-//       end: true,
-//     },
-//   ];
 
   const theme = {
         background: "#fff",
