@@ -13,7 +13,7 @@ function HomePage() {
     width: '100%',
     height: '100%',
     zIndex: -1,
-    opacity: 0.6, // Set the opacity to 80%
+    opacity: 0.6, 
   };
 
   return (
