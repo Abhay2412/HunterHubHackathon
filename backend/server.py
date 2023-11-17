@@ -145,6 +145,37 @@ def chat_summary():
     reply = continous_chat_summary(user_input, candidate_document)
     return jsonify({"reply": reply})
 
+
+def generate_document_flashcards(candidate_document):
+    messages = [
+        {"role": "system", "content": 
+            "Please read the provided technical document carefully and create 10 flash cards based on its content, formatted in JSON. Each flash card should feature a key concept, term, or principle from the document. Format each card with a question that targets a specific aspect of the document, followed by an answer that concisely explains or defines it. Ensure that the flash cards cover a range of topics to provide a comprehensive understanding of the document's subject matter. Present the flash cards in a JSON array, with each card as a separate object containing 'question' and 'answer' fields."
+        },
+        {"role": "user", "content": f"Candidate Document: {candidate_document}"},
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4-1106-preview",
+        messages=messages
+    )
+
+    ChatGPT_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": ChatGPT_reply})
+
+    return ChatGPT_reply
+
+
+@app.route('/api/prompt/flashcards', methods=['POST'])
+def prompt_flashcards():
+    data = request.json
+    candidate_document = data.get('candidate_document')
+
+    if not candidate_document:
+        return jsonify({"error": "Missing candidate_document"}), 400
+
+    result = generate_document_flashcards(candidate_document)
+    return jsonify({"response": result})
+
 # !Scholarships
 # Hit ChatGPT endpoint with query prompt and files saved locally
 
