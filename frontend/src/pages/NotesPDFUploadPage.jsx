@@ -2,10 +2,10 @@
 import React from 'react';
 import PDFUploadComponent from '../components/PDFUploadComponent';
 
-const PDFUploadPage = ({ onFileSelect }) => {
+const PDFUploadPage = ({ onFileSelect, onSummarizerClick, onScholarshipClick }) => {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <PDFUploadComponent onPDFUpload={onFileSelect} />
+      <PDFUploadComponent onPDFUpload={onFileSelect} onSummarizerClick={onSummarizerClick} onScholarshipClick={onScholarshipClick} />
     </div>
   );
 };
