@@ -24,6 +24,8 @@ import spacy
 from spacy.matcher import Matcher
 from spacy import displacy
 from spacy.pipeline.entityruler import EntityRuler
+import json
+from recommendations import scholarship_recommendation
 
 # !Initial Setup
 app = Flask(__name__)
@@ -251,33 +253,26 @@ def chat():
     return jsonify({"reply": reply})
 
 
-@app.route('/parse', methods=['POST'])
+@app.route('/recommended', methods=['POST'])
 def process_resume():
     try:
-        # file = request.files['file']
-
+        file = request.files['file']
+        
         # Load the pre-trained spaCy English NLP model
         nlp = spacy.load("en_core_web_lg")
         matcher = Matcher(nlp.vocab)
+        resume_text = extract_text_from_file(file)
 
-        # # Get resume text from the request
-        # print("heyhey")
-        # resume_text = extract_text(file)
-        
-        data = request.json
-        resume_text = data.get('resume')
+        if resume_text == None:
+            return jsonify({"error": "Invalid file"}), 400
 
         print("Resume text: ", resume_text)
 
         # Process the resume text
-        # names = extract_name(resume_text)
-        # phones = extract_phone(resume_text)
-        # emails = extract_email(resume_text)
         education_section = extract_education_section(resume_text)
         faculty = extract_faculty(education_section)
         year_entering = extract_year_entering(education_section)
         gpa = extract_GPA(education_section)
-        company_names = extract_company_names(resume_text)
 
         technical_skills_patterns = load_skills("../scripts/jz_skill_patterns.jsonl")
         add_skills(technical_skills_patterns, matcher)
@@ -288,28 +283,54 @@ def process_resume():
         soft_skills = extract_skills(resume_text, matcher)
 
         # Assuming you want to return the extracted information
-        result = {
-            # "names": names,
-            # "phones": phones,
-            # "emails": emails,
-            "technical skills": technical_skills,
-            "soft skills": soft_skills,
-            "faculty": faculty,
+        student_dict = {
             "year_entering": year_entering,
-            "gpa": gpa,
-            # "jobs": jobs,
-            # "company_names": company_names
+            "faculty": faculty,
+            "skills": technical_skills,
+            "soft skills": soft_skills,
+            "gpa": gpa
         }
 
-        print(result)
+        with open('../scripts/scholarships_data_sorted.json', 'r') as f:
+            # Load the JSON content from the file
+            scholarships_dict = json.load(f)
 
-        return jsonify({"result": result})
+        scholarship_scores = []
+
+        for scholarship in scholarships_dict:
+            recommendation_score = scholarship_recommendation(scholarship, student_dict)
+
+            scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"]})
+
+        # Sort the list of dictionaries by recommendation_score
+        sorted_scholarships = sorted(scholarship_scores, key=lambda x: list(x.values())[0], reverse=True)
+
+        # Keep only the top 5 scholarships
+        top_5_scholarships = sorted_scholarships[:5]
+
+        # Print the resulting list of dictionaries
+        print("Top 5 Highest recommended scholarships: ", top_5_scholarships)
+
+        return jsonify(top_5_scholarships)
         # return result
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
-    
+
+def extract_text_from_file(file):
+    if 'file' not in request.files:
+        return None
+
+    if file.filename == '':
+        return None
+
+    if file:
+        # Read the file from the request
+        pdf_file = io.BytesIO(file.read())
+
+        # Extract text using pdfminer
+        text = extract_text(pdf_file)
+        return text
     
 @app.after_request
 def after_request(response):
