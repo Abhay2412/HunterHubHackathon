@@ -1,7 +1,6 @@
-import pandas as pd
 import numpy as np
-import json
 import parse as parse
+
 
 def calculate_cosine_similarity(vector1, vector2):
     """Calculates the cosine similarity between two vectors
@@ -16,9 +15,14 @@ def calculate_cosine_similarity(vector1, vector2):
     dot_product = np.dot(vector1, vector2)
     norm_vector1 = np.linalg.norm(vector1)
     norm_vector2 = np.linalg.norm(vector2)
-    
-    similarity = dot_product / (norm_vector1 * norm_vector2) if norm_vector1 * norm_vector2 != 0 else 0
+
+    similarity = (
+        dot_product / (norm_vector1 * norm_vector2)
+        if norm_vector1 * norm_vector2 != 0
+        else 0
+    )
     return similarity
+
 
 def scholarship_recommendation(scholarship, student):
     # Define weights for different criteria
@@ -28,36 +32,49 @@ def scholarship_recommendation(scholarship, student):
     }
 
     # Check if the scholarship title contains any included word
-    if not any(word.lower() in scholarship["title"].lower() for word in student["faculty"]):
-        return 0
-         
-    # Check for GPA and year entering criteria
-    if (
-        (student["gpa"] is not None and student["gpa"] < 3.30 and
-         any("Academic merit" in desc.lower() for desc in scholarship["award_description"])) or
-        student.get("year_entering") not in scholarship.get("year_entering", [])
+    if not any(
+        word.lower() in scholarship["title"].lower() for word in student["faculty"]
     ):
         return 0
 
+    # Check for GPA and year entering criteria
+    if (
+        student["gpa"] is not None
+        and student["gpa"] < 3.30
+        and any(
+            "Academic merit" in desc.lower()
+            for desc in scholarship["award_description"]
+        )
+    ) or student.get("year_entering") not in scholarship.get("year_entering", []):
+        return 0
+
     # Check for faculty match
-    scholarship_faculty = scholarship['required_criteria'].get("Faculty", "").lower()
+    scholarship_faculty = scholarship["required_criteria"].get("Faculty", "").lower()
     student_faculty = [faculty.lower() for faculty in student.get("faculty", [])]
 
     if scholarship_faculty != "any" and scholarship_faculty not in student_faculty:
         return 0
-    
+
     # Extract relevant information from the scholarship and student dictionaries
-    hard_skills_criteria = set([
-        *scholarship.get("award_description", []),
-        *student.get("skills", []),
-    ])
+    hard_skills_criteria = set(
+        [
+            *scholarship.get("award_description", []),
+            *student.get("skills", []),
+        ]
+    )
 
     soft_skills_criteria = set(student.get("soft skills", []))
 
     # Construct binary vectors for scholarship and student criteria
     all_criteria = list(hard_skills_criteria.union(soft_skills_criteria))
-    scholarship_vector = [weights.get("skills", 1) if crit in hard_skills_criteria else 0 for crit in all_criteria]
-    student_vector = [weights.get("soft_skills", 1) if crit in soft_skills_criteria else 0 for crit in all_criteria]
+    scholarship_vector = [
+        weights.get("skills", 1) if crit in hard_skills_criteria else 0
+        for crit in all_criteria
+    ]
+    student_vector = [
+        weights.get("soft_skills", 1) if crit in soft_skills_criteria else 0
+        for crit in all_criteria
+    ]
 
     # Calculate cosine similarity
     similarity = calculate_cosine_similarity(scholarship_vector, student_vector)
