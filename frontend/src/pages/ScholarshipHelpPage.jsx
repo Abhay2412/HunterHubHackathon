@@ -1,7 +1,9 @@
 // ScholarshipHelpPage.jsx
-import React, { useState, useEffect } from "react";
-import { ThemeProvider } from "styled-components";
+
+import React, { useEffect, useState } from "react";
+
 import ChatBot from "react-simple-chatbot";
+import { ThemeProvider } from "styled-components";
 
 const printParagraphs = (input) => {
   const text = input.replace(/\n/g, "<br>");
@@ -31,7 +33,7 @@ const GPTPrompt = (props) => {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/api/prompt/scholarships",
+          "https://scholarly-akool.koyeb.app/api/prompt/scholarships",
           {
             method: "POST",
             headers: {
@@ -113,7 +115,7 @@ const GPTPromptBaF = (props) => {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/api/prompt/scholarship-question",
+          "https://scholarly-akool.koyeb.app/api/prompt/scholarship-question",
           {
             method: "POST",
             headers: {

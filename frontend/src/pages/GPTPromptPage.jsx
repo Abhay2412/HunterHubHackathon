@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-
-
+import React, { useEffect, useState } from "react";
 
 const GPTPromptPage = () => {
     const [state, setState] = useState(0);
   
     useEffect(() => {
-      fetch('http://localhost:8000/api/GPTprompt').then(res => res.json()).then(data => {
+      fetch('https://scholarly-akool.koyeb.app/api/GPTprompt').then(res => res.json()).then(data => {
         setState(data.data);
       });
     }, []);

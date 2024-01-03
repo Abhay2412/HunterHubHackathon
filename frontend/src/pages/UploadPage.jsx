@@ -1,8 +1,10 @@
 // UploadPage.jsx
+
+import { Button, Typography } from '@mui/material';
+import { Link, useNavigate } from "react-router-dom";
+
 import React from 'react';
-import { Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion'
-import { useNavigate, Link } from "react-router-dom";
 
 const UploadPage = () => {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ const UploadPage = () => {
     formData.append('file', file);
 
     try {
-        const response = await fetch('http://localhost:8000/api/extract-text', {
+        const response = await fetch('https://scholarly-akool.koyeb.app/api/extract-text', {
             method: 'POST',
             body: formData,
         });
@@ -40,7 +42,7 @@ const UploadPage = () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('http://localhost:8000/recommended', {
+            const response = await fetch('https://scholarly-akool.koyeb.app/recommended', {
                 method: 'POST',
                 body: formData,
             });

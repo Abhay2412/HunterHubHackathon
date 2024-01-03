@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ThemeProvider } from "styled-components";
+
+import Button from "@mui/material/Button";
 import ChatBot from "react-simple-chatbot";
 import FlashCard from "../components/FlashCard";
 import MobileStepper from "@mui/material/MobileStepper";
-import Button from "@mui/material/Button";
+import { ThemeProvider } from "styled-components";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
@@ -28,7 +29,7 @@ const GPTPrompt = (props) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/prompt/summary",
+          "https://scholarly-akool.koyeb.app/api/prompt/summary",
           {
             method: "POST",
             headers: {
@@ -58,7 +59,7 @@ const GPTPrompt = (props) => {
     const fetchFlashcards = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/prompt/flashcards",
+          "https://scholarly-akool.koyeb.app/api/prompt/flashcards",
           {
             method: "POST",
             headers: {
@@ -149,7 +150,7 @@ const GPTPromptBaF = (props) => {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/api/prompt/summary-question",
+          "https://scholarly-akool.koyeb.app/api/prompt/summary-question",
           {
             method: "POST",
             headers: {
