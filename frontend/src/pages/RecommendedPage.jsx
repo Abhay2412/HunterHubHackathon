@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const RecommendedPage = () => {
+export const RecommendedPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const UniversityOfCalgaryScholarships = location.state.data;
@@ -42,8 +42,7 @@ const RecommendedPage = () => {
   );
 
   const handleScholarshipHelp = (e) => {
-    const data = location.state.text;
-    navigate("/scholarship-help", { state: { data } });
+    navigate("/scholarship-help", { state: { data: location.state.text } });
   };
 
   const handleExpandClick = (id) => {
@@ -100,7 +99,7 @@ const RecommendedPage = () => {
             fontWeight: "bolder",
             boxShadow: "0 0 20px 0 rgba(0, 0, 0, 1)",
             borderRadius: "12px",
-            backgroundColor: "#3EB489",
+            backgroundColor: APPLICATION_COLORS.KEPPEL,
             lineHeight: 1.4,
             letterSpacing: 2,
           }}
@@ -138,7 +137,7 @@ const RecommendedPage = () => {
                 <Grid item xs={12} sm={6} md={4} lg={3} key={scholarship.title}>
                   <Card
                     style={{
-                      backgroundColor: "#3EB489",
+                      backgroundColor: APPLICATION_COLORS.KEPPEL,
                       color: "black",
                       marginBottom: "20px",
                       borderRadius: "15px",
@@ -206,7 +205,6 @@ const RecommendedPage = () => {
             </Grid>
           </>
         )}
-        {/* <Link to={"/scholarship-help"}> */}
           <motion.div whileHover={{ scale: 1.1 }}>
             <Button
               color="primary"
@@ -223,7 +221,6 @@ const RecommendedPage = () => {
               Get Scholarship Help! <span>&#x2192;</span>
             </Button>
           </motion.div>
-        {/* </Link> */}
         <Pagination
           count={pageCount}
           page={page}
@@ -240,5 +237,3 @@ const RecommendedPage = () => {
     </div>
   );
 };
-
-export default RecommendedPage;

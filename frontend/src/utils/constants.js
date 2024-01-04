@@ -1,0 +1,6 @@
+export const APPLICATION_COLORS = {
+    HAVELOCK_BLUE: "#6F9CDE",
+    KEPPEL: "#3EB489",
+    PAMPAS: "#EDE8E4",
+    WHITE: "#FFFFFF"
+}

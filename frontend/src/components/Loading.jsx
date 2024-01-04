@@ -1,11 +1,12 @@
+import { APPLICATION_COLORS } from '../utils/constants';
+import { Backdrop } from '@mui/material';
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import { Backdrop } from '@mui/material';
 
 function Loading() {
   return (
     <Backdrop
-      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ color: APPLICATION_COLORS.WHITE, zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
     >
       <img

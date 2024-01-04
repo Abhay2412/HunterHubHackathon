@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 
+import { APPLICATION_COLORS } from "../utils/constants";
 import ChatBot from "react-simple-chatbot";
 import GPTPrompt from "../components/GPTPrompt"
 import { ThemeProvider } from "styled-components";
 import { useLocation } from "react-router-dom";
 
-const ScholarshipHelpPage = () => {
+export const ScholarshipHelpPage = () => {
   const location = useLocation();
   const [uploadedText, setUploadedText] = useState("");
 
@@ -108,15 +109,15 @@ const ScholarshipHelpPage = () => {
   ];
 
   const theme = {
-    background: "#ede8e4",
+    background: APPLICATION_COLORS.PAMPAS,
     fontFamily: "Arial, Helvetica, sans-serif",
-    headerBgColor: "#3EB489",
-    headerFontColor: "#fff",
+    headerBgColor: APPLICATION_COLORS.KEPPEL,
+    headerFontColor: APPLICATION_COLORS.WHITE,
     headerFontSize: "15px",
-    botBubbleColor: "#3EB489",
-    botFontColor: "#fff",
-    userBubbleColor: "#6F9CDE",
-    userFontColor: "#fff",
+    botBubbleColor: APPLICATION_COLORS.KEPPEL,
+    botFontColor: APPLICATION_COLORS.WHITE,
+    userBubbleColor: APPLICATION_COLORS.HAVELOCK_BLUE,
+    userFontColor: APPLICATION_COLORS.WHITE,
     bubbleStyle: {
       textAlign: "left",
       maxHeight: "100%",
@@ -147,5 +148,3 @@ const ScholarshipHelpPage = () => {
     </div>
   );
 };
-
-export default ScholarshipHelpPage;

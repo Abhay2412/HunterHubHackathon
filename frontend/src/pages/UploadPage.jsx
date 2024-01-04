@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 // UploadPage.jsx
 
-const UploadPage = () => {
+export const UploadPage = () => {
   const navigate = useNavigate();
   const [file, setFile] = React.useState(null);
   const [loading, setLoading] = useState(false);
@@ -116,7 +116,7 @@ const UploadPage = () => {
           <span
             style={{
               fontFamily: "cursive",
-              color: "#3EB489",
+              color: APPLICATION_COLORS.KEPPEL,
               fontWeight: "bold",
             }}
           >
@@ -137,7 +137,7 @@ const UploadPage = () => {
               marginBottom: "10px",
               borderRadius: "15px",
               fontSize: "1.4rem",
-              backgroundColor: "#3EB489",
+              backgroundColor: APPLICATION_COLORS.KEPPEL,
               color: "white",
               textTransform: "none",
             }}
@@ -181,5 +181,3 @@ const UploadPage = () => {
     </div>
   );
 };
-
-export default UploadPage;

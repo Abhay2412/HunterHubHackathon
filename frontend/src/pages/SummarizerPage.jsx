@@ -336,15 +336,15 @@ const SummarizerPage = () => {
   };
 
   const theme = {
-    background: "#ede8e4",
+    background: APPLICATION_COLORS.PAMPAS,
     fontFamily: "Arial, Helvetica, sans-serif",
-    headerBgColor: "#3EB489",
-    headerFontColor: "#fff",
+    headerBgColor: APPLICATION_COLORS.KEPPEL,
+    headerFontColor: APPLICATION_COLORS.WHITE,
     headerFontSize: "15px",
-    botBubbleColor: "#3EB489",
-    botFontColor: "#fff",
-    userBubbleColor: "#6F9CDE",
-    userFontColor: "#fff",
+    botBubbleColor: APPLICATION_COLORS.KEPPEL,
+    botFontColor: APPLICATION_COLORS.WHITE,
+    userBubbleColor: APPLICATION_COLORS.HAVELOCK_BLUE,
+    userFontColor: APPLICATION_COLORS.WHITE,
     bubbleStyle: {
       textAlign: "left",
       maxHeight: "100%",
@@ -409,7 +409,7 @@ const SummarizerPage = () => {
             fontWeight: "bolder",
             boxShadow: "0 0 20px 0 rgba(0, 0, 0, 1)",
             borderRadius: "12px",
-            backgroundColor: "#3EB489",
+            backgroundColor: APPLICATION_COLORS.KEPPEL,
             lineHeight: 1.4,
             letterSpacing: 2,
           }}

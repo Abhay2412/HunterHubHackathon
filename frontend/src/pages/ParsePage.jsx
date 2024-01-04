@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ParsePage = () => {
+export const ParsePage = () => {
     const [state, setState] = useState(0);
   
     useEffect(() => {
@@ -17,5 +17,3 @@ const ParsePage = () => {
       </div>
     );
 }
-
-export default ParsePage
