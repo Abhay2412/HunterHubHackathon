@@ -24,14 +24,14 @@ const UploadPage = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/api/extract-text", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      setLoading(false)
-      navigate("/summarizer", { state: { data, file } });
-      console.log(data); // Handle the response from the backend
+        const response = await fetch('https://scholarly-akool.koyeb.app/api/extract-text', {
+            method: 'POST',
+            body: formData,
+        });
+        const data = await response.json();
+        setLoading(false)
+        navigate('/summarizer', { state: { data, file } });
+        console.log(data); // Handle the response from the backend
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -43,13 +43,13 @@ const UploadPage = () => {
     formData.append("file", file);
 
     try {
-      const response_text = await fetch("http://localhost:8000/api/extract-text", {
+      const response_text = await fetch("https://scholarly-akool.koyeb.app/api/extract-text", {
         method: "POST",
         body: formData,
       });
       const text = await response_text.json();
       
-      const response = await fetch("http://localhost:8000/recommended", {
+      const response = await fetch("https://scholarly-akool.koyeb.app/api/recommended", {
         method: "POST",
         body: formData,
       });
