@@ -1,9 +1,10 @@
+import { Button, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 // UploadPage.jsx
 import React, { useState } from "react";
-import { Typography, Button } from "@mui/material";
-import { motion } from "framer-motion";
-import { useNavigate, Link } from "react-router-dom";
+
 import Loading  from "../components/Loading";
+import { motion } from "framer-motion";
 
 const UploadPage = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const UploadPage = () => {
       });
       const text = await response_text.json();
       
-      const response = await fetch("https://scholarly-akool.koyeb.app/api/recommended", {
+      const response = await fetch("https://scholarly-akool.koyeb.app/recommended", {
         method: "POST",
         body: formData,
       });
