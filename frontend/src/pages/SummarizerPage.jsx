@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
 import ChatBot from "react-simple-chatbot";
+import CircularProgress from "@mui/material/CircularProgress";
 import FlashCard from "../components/FlashCard";
 import MobileStepper from "@mui/material/MobileStepper";
 import { ThemeProvider } from "styled-components";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
 
-// const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
 const GPTPrompt = (props) => {
-  console.log(props);
   const {
     steps,
     triggerNextStep,
@@ -20,11 +18,9 @@ const GPTPrompt = (props) => {
     selectedFile,
     setFlashcardsLoading,
   } = props;
-  // const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState("");
   const [result, setResult] = useState("");
-  //   const [flashcards, setFlashcards] = useState([]);
   const [trigger, setTrigger] = useState(false);
 
   const triggerNext = () => {
@@ -55,7 +51,6 @@ const GPTPrompt = (props) => {
         }
 
         const resultData = await response.json();
-        console.log(resultData);
 
         setResult(resultData.response);
       } catch (error) {
@@ -93,10 +88,6 @@ const GPTPrompt = (props) => {
 
         // Parse the JSON string to get the array of flashcards
         const flashcards = JSON.parse(jsonString);
-
-        console.log(flashcards);
-
-        // setResult(resultData.response);
         setFlashcards(flashcards);
       } catch (error) {
         console.error("Error:", error.message);
@@ -147,11 +138,8 @@ const GPTPrompt = (props) => {
   );
 };
 
-// const GPTPromptBaF = ({ steps, triggerNextStep, uploadedFile }) => {
 const GPTPromptBaF = (props) => {
-  // console.log(props)
   const { steps, triggerNextStep, selectedFile } = props;
-  // const GPTPromptBaF = ({ steps, triggerNextStep, uploadedFile }) => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
   const [trigger, setTrigger] = useState(false);
@@ -186,8 +174,6 @@ const GPTPromptBaF = (props) => {
         }
 
         const resultData = await response.json();
-        console.log(resultData);
-        // console.log(printParagraphs(resultData.response));
 
         setResult(resultData.reply);
       } catch (error) {
@@ -254,9 +240,6 @@ const SummarizerPage = () => {
       };
       setUploadedText(location.state.data.text);
     }
-    // console.log(location.state.data)
-    // console.log(location.state.data.text)
-    // console.log(uploadedText)
   }, [location]);
 
   const steps = [

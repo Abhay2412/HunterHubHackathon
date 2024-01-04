@@ -1,10 +1,15 @@
 import { Button, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-// UploadPage.jsx
 import React, { useState } from "react";
 
 import Loading  from "../components/Loading";
 import { motion } from "framer-motion";
+
+// UploadPage.jsx
+
+
+
+
 
 const UploadPage = () => {
   const navigate = useNavigate();
@@ -32,7 +37,6 @@ const UploadPage = () => {
         const data = await response.json();
         setLoading(false)
         navigate('/summarizer', { state: { data, file } });
-        console.log(data); // Handle the response from the backend
     } catch (error) {
       console.error("Error uploading file:", error);
     }
@@ -59,8 +63,6 @@ const UploadPage = () => {
       setLoading(false)
       navigate("/recommended-scholarships", { state: { data, text } });
 
-      console.log(text); // Handle the response from the backend
-      console.log(data); // Handle the response from the backend
     } catch (error) {
       console.error("Error uploading file:", error);
     }

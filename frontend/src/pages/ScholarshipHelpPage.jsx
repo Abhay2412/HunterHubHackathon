@@ -1,9 +1,9 @@
 // ScholarshipHelpPage.jsx
 
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import ChatBot from "react-simple-chatbot";
-import { useNavigate, Link, useLocation } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ThemeProvider } from "styled-components";
 
@@ -12,11 +12,8 @@ const printParagraphs = (input) => {
   return text;
 };
 
-// const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
 const GPTPrompt = (props) => {
-  // console.log(props)
   const { steps, triggerNextStep, candidateResume } = props;
-  // const GPTPrompt = ({ steps, triggerNextStep, uploadedFile }) => {
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState("");
   const [trigger, setTrigger] = useState(false);
@@ -51,9 +48,6 @@ const GPTPrompt = (props) => {
         }
 
         const resultData = await response.json();
-        console.log(resultData);
-        console.log(printParagraphs(resultData.response));
-
         setResult(resultData.response);
       } catch (error) {
         console.error("Error:", error.message);
@@ -97,11 +91,8 @@ const GPTPrompt = (props) => {
   );
 };
 
-// const GPTPromptBaF = ({ steps, triggerNextStep, uploadedFile }) => {
 const GPTPromptBaF = (props) => {
-  // console.log(props)
   const { steps, triggerNextStep, candidateResume } = props;
-  // const GPTPromptBaF = ({ steps, triggerNextStep, uploadedFile }) => {
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState("");
   const [trigger, setTrigger] = useState(false);
@@ -138,8 +129,6 @@ const GPTPromptBaF = (props) => {
         }
 
         const resultData = await response.json();
-        console.log(resultData);
-        // console.log(printParagraphs(resultData.response));
 
         setResult(resultData.reply);
       } catch (error) {
@@ -197,8 +186,6 @@ const ScholarshipHelpPage = () => {
 
   useEffect(() => {
     setUploadedText(location.state.data.text);
-    console.log(location.state.data);
-    console.log(uploadedText);
   }, [location]);
 
   const steps = [

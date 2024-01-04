@@ -1,21 +1,24 @@
 // RecommendedPage.jsx
-import React, { useEffect, useState } from "react";
+
 import {
+  Button,
   Card,
-  CardContent,
   CardActions,
-  Typography,
-  IconButton,
+  CardContent,
+  CardMedia,
   Collapse,
   Grid,
-  CardMedia,
+  IconButton,
   Pagination,
-  Button,
+  Typography,
 } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { styled } from "@mui/material/styles";
-import { useLocation, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { styled } from "@mui/material/styles";
+
 // import UniversityOfCalgaryScholarships from '../scholarships_dummy_data.json'
 
 const ExpandMore = styled((props) => {
@@ -33,7 +36,6 @@ const RecommendedPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const UniversityOfCalgaryScholarships = location.state.data;
-  console.log(UniversityOfCalgaryScholarships);
   const [expandedIds, setExpandedIds] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
