@@ -12,14 +12,12 @@ import {
   Pagination,
   Typography,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { motion } from "framer-motion";
 import { styled } from "@mui/material/styles";
-
-// import UniversityOfCalgaryScholarships from '../scholarships_dummy_data.json'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

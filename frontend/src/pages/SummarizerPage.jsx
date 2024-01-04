@@ -102,10 +102,7 @@ const GPTPrompt = (props) => {
     };
 
     wrapper();
-
-    // triggerNext()
   }, []);
-  //   }, [steps.query.value, uploadedFile]);
 
   const renderText = (inputText) => {
     return inputText.split("\n").map((line, index) => (

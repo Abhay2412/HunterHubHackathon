@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import GPTPromptPage from './pages/GPTPromptPage';
-import RecommendedPage from './pages/RecommendedPage';
-import ParsePage from './pages/ParsePage';
-import SummarizerPage from './pages/SummarizerPage';
-import UploadPage from './pages/UploadPage';
-import ScholarshipHelpPage from './pages/ScholarshipHelpPage';
-
 import './App.css';
 
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+import GPTPromptPage from './pages/GPTPromptPage';
+import HomePage from './pages/HomePage';
+import ParsePage from './pages/ParsePage';
+import React from 'react';
+import RecommendedPage from './pages/RecommendedPage';
+import ScholarshipHelpPage from './pages/ScholarshipHelpPage';
+import SummarizerPage from './pages/SummarizerPage';
+import UploadPage from './pages/UploadPage';
+
 function App() {
-    const [file, setNoteSummarizerFile] = useState(null);
-    const [resumeFile, setResumeFile] = useState(null);
 
     return (
         <div className='App'>

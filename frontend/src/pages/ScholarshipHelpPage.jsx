@@ -1,16 +1,11 @@
 // ScholarshipHelpPage.jsx
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import ChatBot from "react-simple-chatbot";
 import CircularProgress from "@mui/material/CircularProgress";
 import { ThemeProvider } from "styled-components";
-
-const printParagraphs = (input) => {
-  const text = input.replace(/\n/g, "<br>");
-  return text;
-};
 
 const GPTPrompt = (props) => {
   const { steps, triggerNextStep, candidateResume } = props;
@@ -56,9 +51,7 @@ const GPTPrompt = (props) => {
       }
     };
     fetchData();
-    // triggerNext()
   }, []);
-  //   }, [steps.query.value, uploadedFile]);
 
   const renderText = (inputText) => {
     return inputText.split("\n").map((line, index) => (
@@ -237,7 +230,6 @@ const ScholarshipHelpPage = () => {
     // Hit GPT endpoint
     {
       id: "query",
-      //   component: <GPTPrompt uploadedFile />,
       component: <GPTPrompt candidateResume={location.state.data.text} />,
       asMessage: true,
       waitAction: true,
@@ -251,7 +243,6 @@ const ScholarshipHelpPage = () => {
     {
       id: "6",
       options: [
-        // { value: 1, label: "Yes", trigger: "url" },
         { value: 1, label: "Yes", trigger: "7" },
         { value: 2, label: "No", trigger: "9" },
       ],
@@ -270,7 +261,6 @@ const ScholarshipHelpPage = () => {
     // Hit GPT endpoint
     {
       id: "query2",
-      //   component: <GPTPrompt uploadedFile />,
       component: <GPTPromptBaF candidateResume={location.state.data.text} />,
       asMessage: true,
       waitAction: true,
