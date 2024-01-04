@@ -371,15 +371,8 @@ def process_resume():
             recommendation_score = scholarship_recommendation(scholarship, student_dict)
 
             if recommendation_score > 0:
-                scholarship_scores.append(
-                    {
-                        "recommendation_score": recommendation_score,
-                        "title": scholarship["title"],
-                        "award_value": scholarship["award_value"],
-                        "number_of_awards": scholarship["number_of_awards"],
-                        "award_description": scholarship["award_description"],
-                    }
-                )
+                scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"], "year_entering": scholarship["year_entering"]})
+
         # Sort the list of dictionaries by recommendation_score
         sorted_scholarships = sorted(
             scholarship_scores, key=lambda x: list(x.values())[0], reverse=True
@@ -414,7 +407,7 @@ def extract_text_from_file(file):
         return text
 
 
-CORS(app, resources={r"/api/*": {"origins": "https://hunter-hub-hackathon.vercel.app"}})
+CORS(app, resources={r"/api/*": {"origins": "https://scholarly-hhh.vercel.app/"}})
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 
@@ -422,7 +415,7 @@ if __name__ == "__main__":
 @app.after_request
 def after_request(response):
     response.headers.add(
-        "Access-Control-Allow-Origin", "https://hunter-hub-hackathon.vercel.app"
+        "Access-Control-Allow-Origin", "https://scholarly-hhh.vercel.app/"
     )
     response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
     response.headers.add("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE")
