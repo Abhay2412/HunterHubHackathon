@@ -1,179 +1,13 @@
 // ScholarshipHelpPage.jsx
 
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import ChatBot from "react-simple-chatbot";
-import CircularProgress from "@mui/material/CircularProgress";
+import GPTPrompt from "../components/GPTPrompt"
 import { ThemeProvider } from "styled-components";
-
-const GPTPrompt = (props) => {
-  const { steps, triggerNextStep, candidateResume } = props;
-  const [loading, setLoading] = useState(true);
-  const [result, setResult] = useState("");
-  const [trigger, setTrigger] = useState(false);
-
-  const triggerNext = () => {
-    setTrigger(true);
-    triggerNextStep();
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const scholarshipUrl = steps.url.value;
-
-      try {
-        setLoading(true);
-        const response = await fetch(
-          "https://scholarly-akool.koyeb.app/api/prompt/scholarships",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              candidate_resume: candidateResume,
-              scholarship_url: scholarshipUrl,
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const resultData = await response.json();
-        setResult(resultData.response);
-      } catch (error) {
-        console.error("Error:", error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const renderText = (inputText) => {
-    return inputText.split("\n").map((line, index) => (
-      <React.Fragment key={index}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
-  };
-  return (
-    <div className="GPTPrompt" style={{ textAlign: "left", padding: "0 20px" }}>
-      {loading ? (
-        <>
-          <CircularProgress />
-        </>
-      ) : (
-        <>
-          <>{renderText(result)}</>
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-            }}
-          >
-            {!trigger && <button onClick={triggerNext}>Ask Again</button>}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
-
-const GPTPromptBaF = (props) => {
-  const { steps, triggerNextStep, candidateResume } = props;
-  const [loading, setLoading] = useState(true);
-  const [result, setResult] = useState("");
-  const [trigger, setTrigger] = useState(false);
-
-  const triggerNext = () => {
-    setTrigger(true);
-    triggerNextStep();
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const scholarshipUrl = steps.url.value;
-      const msg = steps.msg.value;
-
-      try {
-        setLoading(true);
-        const response = await fetch(
-          "https://scholarly-akool.koyeb.app/api/prompt/scholarship-question",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              candidate_resume: candidateResume,
-              scholarship_url: scholarshipUrl,
-              message: msg,
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const resultData = await response.json();
-
-        setResult(resultData.reply);
-      } catch (error) {
-        console.error("Error:", error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-    // triggerNext()
-  }, []);
-  //   }, [steps.query.value, uploadedFile]);
-
-  const renderText = (inputText) => {
-    return inputText.split("\n").map((line, index) => (
-      <React.Fragment key={index}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
-  };
-  return (
-    <div
-      className="GPTPromptBaF"
-      style={{ textAlign: "left", padding: "0 20px" }}
-    >
-      {loading ? (
-        <>
-          <CircularProgress />
-        </>
-      ) : (
-        <>
-          <>
-            {renderText(result)}
-            {/* // {result} */}
-          </>
-          <div
-            style={{
-              textAlign: "center",
-              marginTop: 20,
-            }}
-          >
-            {!trigger && <button onClick={triggerNext}>Ask Again</button>}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+import { useLocation } from "react-router-dom";
 
 const ScholarshipHelpPage = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [uploadedText, setUploadedText] = useState("");
 
@@ -230,7 +64,7 @@ const ScholarshipHelpPage = () => {
     // Hit GPT endpoint
     {
       id: "query",
-      component: <GPTPrompt candidateResume={location.state.data.text} />,
+      component: <GPTPrompt candidateResume={location.state.data.text} apiUrl="https://scholarly-akool.koyeb.app/api/prompt/scholarships"/>,
       asMessage: true,
       waitAction: true,
       trigger: "5",
@@ -261,7 +95,7 @@ const ScholarshipHelpPage = () => {
     // Hit GPT endpoint
     {
       id: "query2",
-      component: <GPTPromptBaF candidateResume={location.state.data.text} />,
+      component: <GPTPrompt candidateResume={location.state.data.text} apiUrl="https://scholarly-akool.koyeb.app/api/prompt/scholarship-question"/>,
       asMessage: true,
       waitAction: true,
       trigger: "5",
