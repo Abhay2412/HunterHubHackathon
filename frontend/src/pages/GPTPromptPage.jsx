@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const GPTPromptPage = () => {
+export default GPTPromptPage = () => {
     const [state, setState] = useState(0);
   
     useEffect(() => {
@@ -17,5 +17,3 @@ const GPTPromptPage = () => {
       </div>
     );
 }
-
-export default GPTPromptPage

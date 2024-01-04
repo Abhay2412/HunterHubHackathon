@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export const RecommendedPage = () => {
+export default RecommendedPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const UniversityOfCalgaryScholarships = location.state.data;
