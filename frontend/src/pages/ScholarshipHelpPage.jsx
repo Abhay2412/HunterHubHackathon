@@ -8,7 +8,7 @@ import GPTPrompt from "../components/GPTPrompt"
 import { ThemeProvider } from "styled-components";
 import { useLocation } from "react-router-dom";
 
-export default ScholarshipHelpPage = () => {
+export default function ScholarshipHelpPage() {
   const location = useLocation();
   const [uploadedText, setUploadedText] = useState("");
 

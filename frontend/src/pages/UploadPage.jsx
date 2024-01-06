@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 // UploadPage.jsx
 
-export default UploadPage = () => {
+export default function UploadPage() {
   const navigate = useNavigate();
   const [file, setFile] = React.useState(null);
   const [loading, setLoading] = useState(false);
