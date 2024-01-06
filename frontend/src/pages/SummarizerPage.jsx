@@ -230,7 +230,7 @@ const SummarizerPage = () => {
 	const [flashcardsLoading, setFlashcardsLoading] = useState(false);
 
 	useEffect(() => {
-		if (location.state && location.state.file) {
+		if (location.state?.file) {
 			const fileReader = new FileReader();
 			fileReader.readAsDataURL(location.state.file);
 			fileReader.onload = (e) => {

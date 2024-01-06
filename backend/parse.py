@@ -1,25 +1,11 @@
 import spacy
 import re
 import json
-from pdfminer.high_level import extract_text
 from spacy.matcher import Matcher
 
 # Load the pre-trained spaCy English NLP model
 nlp = spacy.load("en_core_web_md")
 matcher = Matcher(nlp.vocab)
-
-
-def extract_text_pdf_whitespaced(path):
-    with open(path, "rb") as file:
-        text = extract_text(file)
-    return text
-
-
-def extract_text_pdf_nonwhitespaced(path):
-    with open(path, "rb") as file:
-        text = extract_text(file)
-    text_nonwhitespaced = " ".join(text.split())
-    return text_nonwhitespaced
 
 
 def extract_name(text):
@@ -57,7 +43,6 @@ def extract_skills(text, matcher):
 
     unique_skills = list(set(item.lower() for item in skills))
     return unique_skills
-    # displacy.serve(doc, style="ent", host="localhost", port=5000)
 
 
 def add_skills(skill_patterns, matcher):
@@ -185,7 +170,6 @@ def extract_jobs(text, matcher):
     for match_id, start, end in matches:
         job_text = doc[start:end].text
         jobs.append(job_text)
-    # displacy.serve(doc, style="ent", host="localhost", port=5000)
 
     return jobs
 
@@ -240,29 +224,3 @@ def extract_company_names(
                     company_names.append(ent.text)
 
     return company_names
-
-
-# Below is code for testing functionality
-
-# resume_text = extract_text_pdf_nonwhitespaced("scripts/OmkarResume.pdf")
-
-# soft_skill_patterns = load_skills("scripts/soft_skill_patterns.jsonl")
-# add_skills(soft_skill_patterns, matcher)
-# soft_skills = extract_skills(resume_text, matcher)
-# print("Extracted Soft Skills: ", soft_skills)
-
-# jobs_patterns = load_jobs("scripts/occupations.json")
-# add_jobs(jobs_patterns, matcher)
-# jobs = extract_skills(resume_text, matcher)
-# print("Extracted jobs: ", jobs)
-
-# Extract company names from the experience section
-# experience_companies = extract_company_names(resume_text)
-# print("Extracted Company Names from Experience:", experience_companies)
-
-# major = extract_majors(resume_text, major_list)
-# print(major)
-# skill_patterns = load_skills("jz_skill_patterns.jsonl")
-# add_skills(skill_patterns, matcher)
-# skills = extract_skills(resume_text, matcher)
-# print("Extracted Skills: ", skills)

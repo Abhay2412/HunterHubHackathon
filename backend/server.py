@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import os
 from pdfminer.high_level import extract_text
 import openai
 import io
@@ -11,14 +12,11 @@ from parse import (
     extract_faculty,
     extract_GPA,
     extract_skills,
-    extract_text,
     extract_year_entering,
     add_skills,
 )
-from pdfminer.high_level import extract_text
 import spacy
 from spacy.matcher import Matcher
-import os
 import json
 from recommendations import scholarship_recommendation
 
@@ -53,17 +51,10 @@ def parse():
 
 
 # Jobs PDF documents
-
-
 @app.route("/api/summarizer", methods=["GET"])
 def jobs():
     return {"data": "summarizer"}
 
-
-# # Parse resume file saved locally
-# @app.route('/api/parse', methods=['GET'])
-# def parse():
-#         text = extract_text(file)
 
 # !Summarizer
 # Hit ChatGPT endpoint with query prompt and files saved locally
@@ -333,7 +324,7 @@ def process_resume():
         matcher = Matcher(nlp.vocab)
         resume_text = extract_text_from_file(file)
 
-        if resume_text == None:
+        if resume_text is None:
             return jsonify({"error": "Invalid file"}), 400
 
         print("Resume text: ", resume_text)
@@ -371,7 +362,16 @@ def process_resume():
             recommendation_score = scholarship_recommendation(scholarship, student_dict)
 
             if recommendation_score > 0:
-                scholarship_scores.append({"recommendation_score": recommendation_score, "title": scholarship["title"], "award_value": scholarship["award_value"], "number_of_awards": scholarship["number_of_awards"], "award_description": scholarship["award_description"], "year_entering": scholarship["year_entering"]})
+                scholarship_scores.append(
+                    {
+                        "recommendation_score": recommendation_score,
+                        "title": scholarship["title"],
+                        "award_value": scholarship["award_value"],
+                        "number_of_awards": scholarship["number_of_awards"],
+                        "award_description": scholarship["award_description"],
+                        "year_entering": scholarship["year_entering"],
+                    }
+                )
 
         # Sort the list of dictionaries by recommendation_score
         sorted_scholarships = sorted(
