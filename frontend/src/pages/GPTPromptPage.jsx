@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function GPTPromptPage = () => {
+export default function GPTPromptPage () {
     const [state, setState] = useState(0);
   
     useEffect(() => {
