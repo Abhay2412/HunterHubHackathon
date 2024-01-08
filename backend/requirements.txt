@@ -20,7 +20,7 @@ cors==1.0.1
 cryptography==41.0.5
 cymem==2.0.8
 distro==1.8.0
-en-core-web-lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.0/en_core_web_lg-3.7.0-py3-none-any.whl#sha256=708da1110fbe1163d059de34a2cbedb1db65c26e1e624ca925897a2711cb7d77
+en-core-web-md==3.7.0
 filelock==3.13.1
 Flask==3.0.0
 Flask-Cors==4.0.0
